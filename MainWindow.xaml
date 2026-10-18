@@ -4,30 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameCatalogue"
-        mc:Ignorable="d"
-        Loaded="Window_Loaded">
+        mc:Ignorable="d" 
+        Title="nottgames" Width="1200" Height="600"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow" ResizeMode="CanResize"
+        Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
+        <!-- Сетка: 2 колонки -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
+            <!-- Левая часть для поиска и страниц -->
             <ColumnDefinition Width="1*"/>
+            <!-- Правая часть для меню (кнопок) -->
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="9*"/>
-            <RowDefinition Height="0.5*"/>
-        </Grid.RowDefinitions>
 
+        <!-- Правое боковое меню (Растянуто на все 3 строки в первой колонке) -->
         <StackPanel Grid.Column="1" Margin="10">
             <TextBlock Text="NOTTGAMES" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,30,0,40"/>
-            <Button x:Name="BTNcatalogue" Content="catalogue" Click="BTNcatalogue_Click"/>
-            <Button x:Name="BTNaccount" Content="account" Click="BTNaccount_Click"/>
-            <Button x:Name="BTNadmin" Content="admin" Click="BTNadmin_Click"/>
-            <Button x:Name="BTNLogout" Content="Выйти" Click="BTNLogout_Click" Margin="0,50,0,0" Background="#FF4D8C"/>
+            <Button x:Name="BTNcatalogue" Content="catalogue" Click="BTNcatalogue_Click" Width="300" Height="60" Margin="0,5"/>
+            <Button x:Name="BTNaccount" Content="account" Click="BTNaccount_Click" Width="300" Height="60" Margin="0,5"/>
+            <Button x:Name="BTNadmin" Content="admin" Click="BTNadmin_Click" Width="300" Height="60" Margin="0,5"/>
+            <Button x:Name="BTNLogout" Content="Выйти" Click="BTNLogout_Click" Margin="0,50,0,0" Width="300" Height="60"/>
+
+            <!-- Нижняя строка: Дата и время (В самом низу под кнопками) -->
+            <TextBlock x:Name="TBDateTime" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
         </StackPanel>
 
-        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" Margin="10"/>
+        <!-- Контент страниц (Левая средняя ячейка) -->
+        <Frame Grid.Column="0" x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="10"/>
 
-        <!-- Нижняя строка: Дата и время -->
-        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TBDateTime" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
     </Grid>
 </Window>

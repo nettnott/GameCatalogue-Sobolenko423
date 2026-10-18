@@ -4,11 +4,7 @@
              xmlns:local="clr-namespace:GameCatalogue"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Dictionary.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        
         
     </Application.Resources>
 </Application>

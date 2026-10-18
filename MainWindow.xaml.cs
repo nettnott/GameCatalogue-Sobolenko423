@@ -25,7 +25,7 @@ namespace GameCatalogue
         public MainWindow()
         {
             InitializeComponent();
-            //MainFrame.Navigate(pages/);
+            MainFrame.Navigate(new CataloguePage());
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -37,7 +37,7 @@ namespace GameCatalogue
             };
             timer.Start();
 
-            BTNadmin.Visibility = Lists.currentUser.Role == "ADMIN" && Lists.currentUser != null ? Visibility.Visible : Visibility.Collapsed;
+            BTNadmin.Visibility = Lists.currentUser != null && Lists.currentUser.Role == "ADMIN" ? Visibility.Visible : Visibility.Collapsed;
             BTNLogout.Visibility = Lists.currentUser != null ? Visibility.Collapsed : Visibility.Visible;
         }
 
@@ -56,7 +56,14 @@ namespace GameCatalogue
 
         private void BTNaccount_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new AccountPage());
+            if (Lists.currentUser == null)
+            {
+                MainFrame.Navigate (new LogInPage());
+            }
+            else 
+            { 
+                MainFrame.Navigate(new AccountPage());
+            }
         }
 
         private void BTNadmin_Click(object sender, RoutedEventArgs e)
@@ -66,8 +73,9 @@ namespace GameCatalogue
 
         private void BTNLogout_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Вы уверены, что хотите выйти из аккаунта?", "Message", MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.No)
+            if (MessageBox.Show("Вы уверены, что хотите выйти из аккаунта?", "Message", MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.Yes)
                 Lists.currentUser = null;
         }
+
     }
 }

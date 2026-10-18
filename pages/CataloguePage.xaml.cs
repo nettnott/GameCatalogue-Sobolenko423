@@ -24,5 +24,10 @@ namespace GameCatalogue.pages
         {
             InitializeComponent();
         }
+
+        private void TBSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

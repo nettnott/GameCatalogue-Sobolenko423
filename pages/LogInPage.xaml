@@ -1,0 +1,58 @@
+﻿<Page x:Class="GameCatalogue.pages.LogInPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GameCatalogue.pages"
+      mc:Ignorable="d"
+      Title="LogInPage">
+
+    <Grid Margin="30">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+            <TextBox 
+                CommandManager.PreviewExecuted="textBox_PreviewExecuted"
+                ContextMenu="{x:Null}"
+                Visibility="Hidden"
+                x:Name="captcha"
+                Height="42"
+                Foreground="Red"
+                FontStyle="Italic"
+                FontWeight="Heavy"
+                VerticalAlignment="Top"
+                Width="156"
+                Background="{x:Null}"
+                FontStretch="UltraCondensed"
+                IsReadOnly="True"
+                HorizontalContentAlignment="Center"
+                FontSize="20" />
+            <TextBox Visibility="Hidden"
+                x:Name="captchaInput"
+                HorizontalAlignment="Left"
+                Height="34"
+                TextWrapping="Wrap"
+                Text=""
+                VerticalAlignment="Top"
+                Width="160" />
+            <Button x:Name="submitCaptcha"
+                Visibility="Hidden"
+                Height="34"
+                Content="Submit"
+                ToolTip="Подтвердить ввод капчи"
+                Width="120"
+                Grid.Column="1"
+                Click="submitCaptcha_Click" />
+            <Label Content="Капча:"
+                Name="labelCaptcha"
+                Width="54" />
+
+
+            <Label Content="Логин" x:Name="labelLogin"/>
+            <TextBox x:Name="TBLogin" ToolTip="Введите логин или почту" TextChanged="TBLogin_TextChanged"/>
+            <Label Content="Пароль" x:Name="labelPass"/>
+            <PasswordBox x:Name="PasswordBox" ToolTip="Введите пароль" PasswordChanged="PasswordBox_PasswordChanged" />
+            <Button x:Name="BTNEnter" Content="Log In" ToolTip="Нажмите, чтобы войти" Click="BTNEnter_Click" />
+            <Button x:Name="BTNReg" Content="Create account" ToolTip="Нажмите, чтобы создать аккаунт" Click="BTNReg_Click"/>
+            <Button x:Name="BTNChangePassword" Content="Change password" ToolTip="Нажмите, чтобы сменить пароль" Click="BTNChangePassword_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
