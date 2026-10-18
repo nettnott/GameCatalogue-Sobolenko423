@@ -23,6 +23,7 @@ namespace GameCatalogue.pages
         public CataloguePage()
         {
             InitializeComponent();
+            LBCatalogue.ItemsSource = Lists.gamesDBL;
         }
 
         private void TBSearch_TextChanged(object sender, TextChangedEventArgs e)

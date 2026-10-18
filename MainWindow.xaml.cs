@@ -37,10 +37,23 @@ namespace GameCatalogue
             };
             timer.Start();
 
-            BTNadmin.Visibility = Lists.currentUser != null && Lists.currentUser.Role == "ADMIN" ? Visibility.Visible : Visibility.Collapsed;
-            BTNLogout.Visibility = Lists.currentUser != null ? Visibility.Collapsed : Visibility.Visible;
+            UpdateMenuVisibility();
         }
-
+        public void UpdateMenuVisibility()
+        {
+            if (Lists.currentUser != null)
+            {
+                // Если вошли — проверяем роль (ToUpper защищает от регистра типа "Admin"/"admin")
+                BTNadmin.Visibility = Lists.currentUser.Role?.ToUpper() == "ADMIN" ? Visibility.Visible : Visibility.Collapsed;
+                BTNLogout.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                // Если вышли
+                BTNadmin.Visibility = Visibility.Collapsed;
+                BTNLogout.Visibility = Visibility.Collapsed;
+            }
+        }
         void Window_Closing(Object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (MessageBox.Show("Вы уверены, что хотите закрыть приложение?", "Message", MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.No)
@@ -74,7 +87,11 @@ namespace GameCatalogue
         private void BTNLogout_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Вы уверены, что хотите выйти из аккаунта?", "Message", MessageBoxButton.YesNo) == System.Windows.MessageBoxResult.Yes)
+            {
                 Lists.currentUser = null;
+                UpdateMenuVisibility(); // Сами себя обновляем при выходе
+                MainFrame.Navigate(new CataloguePage());
+            }
         }
 
     }

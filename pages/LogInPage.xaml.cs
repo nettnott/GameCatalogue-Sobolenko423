@@ -58,10 +58,20 @@ namespace GameCatalogue.pages
                 }
                 return;
             }
+            else if (Lists.currentUser != null)
+            {
+                MessageBox.Show("Выйдите из аккаунта, чтобы зайти в новый");
+                return;
+            }
             else
             {
                 Lists.currentUser = user;
                 MessageBox.Show("Пользователь успешно найден!");
+
+                if (Application.Current.MainWindow is MainWindow mainWindow)
+                {
+                    mainWindow.UpdateMenuVisibility();
+                }
 
                 switch (user.Role)
                 {

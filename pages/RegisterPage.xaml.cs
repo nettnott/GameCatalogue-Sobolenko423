@@ -28,92 +28,108 @@ namespace GameCatalogue.pages
         }
         private bool CheckPSW(String password1, String password2)
         {
-            bool en = true;
-            bool number = false;
-
-            if (password1.Length <= 6)
-            {
-                for (int i = 0; i < password1.Length; i++)
-                {
-                    if (password1[i] >= '0' && password1[i] <= '9')
-                        number = true;
-                    else if (!((password1[i] >= 'A' && password1[i] <= 'Z') || (password1[i] >= 'a' && password1[i] <= 'z')))
-                        en = false;
-                }
-
-                if (!en)
-                {
-                    MessageBox.Show("Используйте только английскую расскладку!");
-                    return false;
-                }
-                else if (!number)
-                {
-                    MessageBox.Show("Добавьте хотя бы одну цифру!");
-                    return false;
-                }
-                else if (en && number)
-                {
-                    if (password1 != password2)
-                    {
-                        MessageBox.Show("Пароли не совпадают!");
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-                return true;
-            }
-            else
+            // 1. Проверяем длину (минимум 6 символов)
+            if (password1.Length < 6)
             {
                 MessageBox.Show("Пароль слишком короткий, должно быть минимум 6 символов!");
                 return false;
             }
 
+            bool hasDigit = false;
+            bool onlyEnglish = true;
+
+            // 2. Проверяем состав пароля за один цикл
+            foreach (char c in password1)
+            {
+                if (char.IsDigit(c))
+                {
+                    hasDigit = true;
+                }
+                else if (!((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')))
+                {
+                    onlyEnglish = false;
+                }
+            }
+
+            if (!onlyEnglish)
+            {
+                MessageBox.Show("Используйте только английскую раскладку!");
+                return false;
+            }
+
+            if (!hasDigit)
+            {
+                MessageBox.Show("Добавьте хотя бы одну цифру!");
+                return false;
+            }
+
+            // 3. Проверяем совпадение паролей
+            if (password1 != password2)
+            {
+                MessageBox.Show("Пароли не совпадают!");
+                return false;
+            }
+
+            return true;
         }
 
         private void regButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(TBLog.Text) || string.IsNullOrEmpty(TBFIO.Text) || string.IsNullOrEmpty(passBxFrst.Password) || string.IsNullOrEmpty(passBxScnd.Password))
+            if (string.IsNullOrWhiteSpace(TBLog.Text) ||
+                string.IsNullOrWhiteSpace(TBFIO.Text) ||
+                string.IsNullOrEmpty(passBxFrst.Password) ||
+                string.IsNullOrEmpty(passBxScnd.Password))
             {
                 MessageBox.Show("Заполните все поля!");
                 return;
             }
 
-            if (CheckPSW(passBxFrst.Password, passBxScnd.Password)) 
+            if (CheckPSW(passBxFrst.Password, passBxScnd.Password))
             {
-                var user = Core.Context.Users
-                .AsNoTracking()
-                .FirstOrDefault(u => u.Login == TBLog.Text);
 
-                if (user != null)
+                var userExists = Core.Context.Users
+                    .AsNoTracking()
+                    .Any(u => u.Login == TBLog.Text);
+
+                if (userExists)
                 {
                     MessageBox.Show("Пользователь с таким логином уже существует!");
                     return;
                 }
-                else
+
+                try
                 {
                     Users userObject = new Users
                     {
                         FIO = TBFIO.Text,
                         Login = TBLog.Text,
                         Password = GetHash(passBxFrst.Password),
-
                         Role = CBRole.Text
                     };
+
                     Core.Context.Users.Add(userObject);
                     Core.Context.SaveChanges();
+
                     MessageBox.Show("Пользователь успешно зарегистрирован!");
+
                     TBLog.Clear();
                     passBxFrst.Clear();
                     passBxScnd.Clear();
-                    CBRole.SelectedIndex = 1;
                     TBFIO.Clear();
-                    return;
+                    CBRole.SelectedIndex = 0;
+
+                    if (Application.Current.MainWindow is MainWindow mainWindow)
+                    {
+                        mainWindow.UpdateMenuVisibility();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при сохранении в базу данных: {ex.Message}");
                 }
             }
-            
+
         }
         public static string GetHash(String password)
         {

@@ -23,6 +23,7 @@ namespace GameCatalogue.pages
         public AccountPage()
         {
             InitializeComponent();
+
         }
     }
 }

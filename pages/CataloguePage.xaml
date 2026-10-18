@@ -5,25 +5,83 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GameCatalogue.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1000"
       Title="CataloguePage">
 
-    <Grid>
-        <!-- Сетка: 3 строки -->
+    <Grid Background="#F5F5F7">
+        <!-- Сетка: 2 строки (строка поиска и строка каталога) -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <!-- Средняя строка (Основной контент / Страницы) -->
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="60"/>
+            <!-- Фиксированная высота для поиска -->
+            <RowDefinition Height="*"/>
+            <!-- Всё оставшееся место под каталог игр -->
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
-            <TextBox x:Name="TBSearch" TextChanged="TBSearch_TextChanged" Width="300" Height="30" VerticalContentAlignment="Center"/>
+
+        <!-- Верхняя панель: Поиск (Строка 0) -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0">
+            <TextBox x:Name="TBSearch" TextChanged="TBSearch_TextChanged" Width="350" Height="35" VerticalContentAlignment="Center"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
-            <ListBox x:Name="LBCatalogue">
-                
-            </ListBox>
-        </StackPanel>
+        <!-- Каталог игр (Строка 1) -->
+        <ListBox x:Name="LBCatalogue" Grid.Row="1" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
+
+            <!-- Отображение элементов плиткой в 2 колонки -->
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="2"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <!-- Шаблон карточки игры -->
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <!-- Обертка карточки со скруглением углов и рамкой -->
+                    <Border Margin="15" Background="White" CornerRadius="10" BorderBrush="#E2E8F0" BorderThickness="1" Padding="15" Width="460" Height="160">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110"/>
+                                <!-- Обложка игры -->
+                                <ColumnDefinition Width="*"/>
+                                <!-- Информация -->
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Обложка игры (заглушка, если в БД есть пути, например ImagePath) -->
+                            <!-- Если у тебя в модели другое название поля картинок, замени ImagePath на него -->
+                            <Border Grid.Column="0" CornerRadius="6" ClipToBounds="True" Background="#EDF2F7">
+                                <Image Source="{Binding ImagePath}" Stretch="UniformToFill"/>
+                            </Border>
+                            <Grid Grid.Column="1" Margin="15,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Название -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Категория -->
+                                    <RowDefinition Height="*"/>
+                                    <!-- Описание -->
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Цена -->
+                                </Grid.RowDefinitions>
+
+                                <!-- Название игры -->
+                                <TextBlock Grid.Row="0" Text="{Binding Name}"/>
+
+                                <!-- Жанр / Категория -->
+                                <TextBlock Grid.Row="1" Text="{Binding Category.Name}" />
+
+                                <!-- Описание с автообрезкой под размер карточки -->
+                                <TextBlock Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap"/>
+
+                                <!-- Цена в самом низу карточки -->
+                                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding Price}" />
+                                    <TextBlock Text=" ₽" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>

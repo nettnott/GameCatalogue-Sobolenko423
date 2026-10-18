@@ -9,6 +9,9 @@
 
     <Grid Margin="30">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+            <Label Content="Капча:"
+               Name="labelCaptcha"
+               Width="54" />
             <TextBox 
                 CommandManager.PreviewExecuted="textBox_PreviewExecuted"
                 ContextMenu="{x:Null}"
@@ -41,9 +44,6 @@
                 Width="120"
                 Grid.Column="1"
                 Click="submitCaptcha_Click" />
-            <Label Content="Капча:"
-                Name="labelCaptcha"
-                Width="54" />
 
 
             <Label Content="Логин" x:Name="labelLogin"/>
