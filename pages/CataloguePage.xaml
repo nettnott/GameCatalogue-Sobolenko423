@@ -31,12 +31,12 @@
                     <UniformGrid Columns="2"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
-
+            
             <!-- Шаблон карточки игры -->
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <!-- Обертка карточки со скруглением углов и рамкой -->
-                    <Border Margin="15" Background="White" CornerRadius="10" BorderBrush="#E2E8F0" BorderThickness="1" Padding="15" Width="460" Height="160">
+                    <Border Margin="15" CornerRadius="10" BorderThickness="1" Padding="15" Width="460" MinHeight="160">
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -70,13 +70,11 @@
                                 <TextBlock Grid.Row="1" Text="{Binding Category.Name}" />
 
                                 <!-- Описание с автообрезкой под размер карточки -->
-                                <TextBlock Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap"/>
+                                <TextBlock Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="60"/>
 
                                 <!-- Цена в самом низу карточки -->
-                                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <TextBlock Text="{Binding Price}" />
-                                    <TextBlock Text=" ₽" />
-                                </StackPanel>
+                                    <TextBlock Grid.Row="3"  Text="{Binding Price}" />
+
                             </Grid>
                         </Grid>
                     </Border>
