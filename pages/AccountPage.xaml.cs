@@ -23,7 +23,14 @@ namespace GameCatalogue.pages
         public AccountPage()
         {
             InitializeComponent();
+            TBFIO.Text = Lists.currentUser.FIO;
+            TBLogin.Text = Lists.currentUser.Login;
+            TBRole.Text = Lists.currentUser.Role;
+        }
 
+        private void BTNChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ChangePassPage());
         }
     }
 }
