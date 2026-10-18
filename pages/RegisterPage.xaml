@@ -9,6 +9,28 @@
       Title="RegisterPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Введите логин" />
+            <Label Content="Выберите роль"/>
+            <Label Content="Подтвердите пароль"/>
+            <Label Content="Введите пароль"/>
+            <Label Content="Введите ФИО"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox x:Name="TBLog" ToolTip="Введите логин или почту" Width="180" Height="30"/>
+            <ComboBox x:Name="CBRole" ToolTip="Выберите роль" Width="180" Height="30">
+                <ComboBoxItem Content="USER" />
+                <ComboBoxItem Content="ADMIN" />
+            </ComboBox>
+            <PasswordBox x:Name="passBxFrst" ToolTip="Введите пароль" Width="180" Height="30"/>
+            <PasswordBox x:Name="passBxScnd" ToolTip="Повторите пароль" Width="180" Height="30"/>
+            <TextBox x:Name="TBFIO" ToolTip="Введите ФИО" Width="180" Height="30"/>
+        </StackPanel>
+        <Button Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" x:Name="regButton" ToolTip="Создать аккаунт" Content="Register" Width="150" Height="30" Click="regButton_Click"/> 
     </Grid>
 </Page>

@@ -28,16 +28,6 @@ namespace GameCatalogue.pages
             InitializeComponent();
         }
 
-        private void TBLogin_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void BTNEnter_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(TBLogin.Text) || string.IsNullOrEmpty(PasswordBox.Password))

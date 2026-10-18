@@ -47,9 +47,9 @@
 
 
             <Label Content="Логин" x:Name="labelLogin"/>
-            <TextBox x:Name="TBLogin" ToolTip="Введите логин или почту" TextChanged="TBLogin_TextChanged"/>
+            <TextBox x:Name="TBLogin" ToolTip="Введите логин или почту"/>
             <Label Content="Пароль" x:Name="labelPass"/>
-            <PasswordBox x:Name="PasswordBox" ToolTip="Введите пароль" PasswordChanged="PasswordBox_PasswordChanged" />
+            <PasswordBox x:Name="PasswordBox" ToolTip="Введите пароль"/>
             <Button x:Name="BTNEnter" Content="Log In" ToolTip="Нажмите, чтобы войти" Click="BTNEnter_Click" />
             <Button x:Name="BTNReg" Content="Create account" ToolTip="Нажмите, чтобы создать аккаунт" Click="BTNReg_Click"/>
             <Button x:Name="BTNChangePassword" Content="Change password" ToolTip="Нажмите, чтобы сменить пароль" Click="BTNChangePassword_Click"/>
