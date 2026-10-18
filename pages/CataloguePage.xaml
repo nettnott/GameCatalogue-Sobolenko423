@@ -19,7 +19,12 @@
 
         <!-- Верхняя панель: Поиск (Строка 0) -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0">
-            <TextBox x:Name="TBSearch" TextChanged="TBSearch_TextChanged" Width="350" Height="35" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="TBSearch" ToolTip="Вы можете искать!!" TextChanged="TBSearch_TextChanged" Width="350" Height="35" VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="CBSort" ToolTip="Выберите сортировку" Width="180" Height="30" SelectionChanged="CBSort_SelectionChanged">
+                <ComboBoxItem>A-Z</ComboBoxItem>
+                <ComboBoxItem>Z-A</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="CBFilter" ToolTip="Фильтр по жанру"  Width="180" Height="30" SelectionChanged="CBFilter_SelectionChanged"/>
         </StackPanel>
 
         <!-- Каталог игр (Строка 1) -->
