@@ -114,10 +114,10 @@ namespace GameCatalogue.pages
                     TBLogin.Clear();
                     PasswordBox.Clear();
 
-                    captcha.Visibility = Visibility.Hidden;
-                    captchaInput.Visibility = Visibility.Hidden;
-                    labelCaptcha.Visibility = Visibility.Hidden;
-                    submitCaptcha.Visibility = Visibility.Hidden;
+                    captcha.Visibility = Visibility.Collapsed;
+                    captchaInput.Visibility = Visibility.Collapsed;
+                    labelCaptcha.Visibility = Visibility.Collapsed;
+                    submitCaptcha.Visibility = Visibility.Collapsed;
 
                     labelLogin.Visibility = Visibility.Visible;
                     labelPass.Visibility = Visibility.Visible;
@@ -128,20 +128,20 @@ namespace GameCatalogue.pages
                     BTNEnter.Visibility = Visibility.Visible;
                     BTNReg.Visibility = Visibility.Visible;
                     return;
-                case Visibility.Hidden:
+                case Visibility.Collapsed:
                     captcha.Visibility = Visibility.Visible;
                     captchaInput.Visibility = Visibility.Visible;
                     labelCaptcha.Visibility = Visibility.Visible;
                     submitCaptcha.Visibility = Visibility.Visible;
 
-                    labelLogin.Visibility = Visibility.Hidden;
-                    labelPass.Visibility = Visibility.Hidden;
-                    TBLogin.Visibility = Visibility.Hidden;
-                    PasswordBox.Visibility = Visibility.Hidden;
+                    labelLogin.Visibility = Visibility.Collapsed;
+                    labelPass.Visibility = Visibility.Collapsed;
+                    TBLogin.Visibility = Visibility.Collapsed;
+                    PasswordBox.Visibility = Visibility.Collapsed;
 
-                    BTNChangePassword.Visibility = Visibility.Hidden;
-                    BTNEnter.Visibility = Visibility.Hidden;
-                    BTNReg.Visibility = Visibility.Hidden;
+                    BTNChangePassword.Visibility = Visibility.Collapsed;
+                    BTNEnter.Visibility = Visibility.Collapsed;
+                    BTNReg.Visibility = Visibility.Collapsed;
                     return;
             }
         }

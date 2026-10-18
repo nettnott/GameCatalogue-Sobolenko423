@@ -10,12 +10,13 @@
     <Grid Margin="30">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
             <Label Content="Капча:"
+               Visibility="Collapsed"
                Name="labelCaptcha"
                Width="54" />
             <TextBox 
                 CommandManager.PreviewExecuted="textBox_PreviewExecuted"
                 ContextMenu="{x:Null}"
-                Visibility="Hidden"
+                Visibility="Collapsed"
                 x:Name="captcha"
                 Height="42"
                 Foreground="Red"
@@ -28,7 +29,7 @@
                 IsReadOnly="True"
                 HorizontalContentAlignment="Center"
                 FontSize="20" />
-            <TextBox Visibility="Hidden"
+            <TextBox Visibility="Collapsed"
                 x:Name="captchaInput"
                 HorizontalAlignment="Left"
                 Height="34"
@@ -37,7 +38,7 @@
                 VerticalAlignment="Top"
                 Width="160" />
             <Button x:Name="submitCaptcha"
-                Visibility="Hidden"
+                Visibility="Collapsed"
                 Height="34"
                 Content="Submit"
                 ToolTip="Подтвердить ввод капчи"
