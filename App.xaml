@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:GameCatalogue"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <!-- Задается дефолтное оформление приложения -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="LightDictionary.xaml"/>
