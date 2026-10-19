@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace GameCatalogue
 {
+    /// <summary>
+    /// Создание статических списков с данными из БД для доступа из любого места приложения
+    /// Создание глобальной переменной текущего пользователя, по дефолту она null
+    /// </summary>
     internal class Lists
     {
         public static List<Category> categoriesDBL = Core.Context.Category.ToList();
