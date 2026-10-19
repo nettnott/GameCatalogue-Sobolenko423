@@ -129,7 +129,15 @@
     <Compile Include="Users.cs">
       <DependentUpon>DBGameCatalogue.tt</DependentUpon>
     </Compile>
+    <Page Include="CyberpunkDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LightDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
