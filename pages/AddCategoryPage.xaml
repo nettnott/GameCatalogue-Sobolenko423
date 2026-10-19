@@ -11,11 +11,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Название категории"/>
-            <TextBox x:Name="TBCategoryName" Text="{Binding Name}"  ToolTip="Название категории игры"/>
+            <TextBox x:Name="TBCategoryName" Text="{Binding Name}" ToolTip="Название категории игры" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: Visual Novel"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="ButtonSaveCategory" ToolTip="Сохранить" Content="Сохранить" Click="ButtonSaveCategory_Click"/>

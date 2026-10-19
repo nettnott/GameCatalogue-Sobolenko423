@@ -50,16 +50,54 @@
     </Style>
 
     <!-- Стиль для Текстовых полей -->
-    <Style TargetType="TextBox">
+    <!-- Стиль для TextBox с поддержкой свойства Tag в качестве плейсхолдера -->
+    <Style x:Key="PlaceholderTextBoxStyle" TargetType="TextBox">
         <Setter Property="Height" Value="35"/>
         <Setter Property="Margin" Value="0,6,0,12"/>
         <Setter Property="Padding" Value="8,0"/>
         <Setter Property="FontFamily" Value="Open Sans"/>
-        <Setter Property="Background" Value="{StaticResource PanelBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-        <Setter Property="BorderBrush" Value="#FFC0C0"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="FontSize" Value="11pt"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+        <!-- Переопределяем шаблон элемента, чтобы засунуть внутрь текст подсказки -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="border" 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="4">
+                        <Grid>
+                            <!-- Стандартное поле, куда вводится текст -->
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+
+                            <!-- А это наш плейсхолдер. Он привязан к свойству Tag -->
+                            <TextBlock x:Name="placeholderText" 
+                                   Text="{TemplateBinding Tag}" 
+                                   Foreground="Gray" 
+                                   FontStyle="Italic"
+                                   VerticalAlignment="Center" 
+                                   Margin="8,0"
+                                   IsHitTestVisible="False" 
+                                   Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- ТРИГГЕРЫ: Самая магия происходит здесь -->
+                    <ControlTemplate.Triggers>
+                        <!-- Если текст в TextBox пустой, показываем плейсхолдер -->
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="placeholderText" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <!-- Если поле получает фокус клавиатуры (кликнули мышкой) — прячем плейсхолдер -->
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="placeholderText" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Стиль для Выпадающих списков -->
