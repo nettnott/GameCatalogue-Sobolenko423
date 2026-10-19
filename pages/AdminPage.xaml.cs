@@ -24,5 +24,25 @@ namespace GameCatalogue.pages
         {
             InitializeComponent();
         }
+
+        private void BTNTabUsers_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new UsersTabPage());
+        }
+
+        private void BTNTabCategory_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new CategoryTabPage());
+        }
+
+        private void BTNTabGames_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new GamesTabPage());
+        }
+
+        private void BTNDiagrams_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new DiagramsPage());
+        }
     }
 }
