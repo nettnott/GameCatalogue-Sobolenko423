@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,45 @@ namespace GameCatalogue.pages
         public GamesTabPage()
         {
             InitializeComponent();
+            DataGridPayment.ItemsSource = Core.Context.Games.ToList();
+            this.IsVisibleChanged += Page_IsVisibleChanged;
+        }
+
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (Visibility == Visibility.Visible)
+            {
+                Core.Context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                DataGridPayment.ItemsSource = Core.Context.Games.ToList();
+            }
+        }
+        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new AddGamePage(null));
+        }
+        private void ButtonDel_Click(object sender, RoutedEventArgs e)
+        {
+            var paymentForRemoving =
+            DataGridPayment.SelectedItems.Cast<Games>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить записи в количестве { paymentForRemoving.Count()} элементов ? ", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+{
+                try
+                {
+                    Core.Context.Games.RemoveRange(paymentForRemoving);
+                    Core.Context.SaveChanges();
+                    MessageBox.Show("Данные успешно удалены!");
+                    DataGridPayment.ItemsSource = Core.Context.Games.ToList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+        }
+
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddGamePage((sender as Button).DataContext as Games));
         }
     }
 }

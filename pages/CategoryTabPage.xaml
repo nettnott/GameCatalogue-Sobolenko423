@@ -9,6 +9,23 @@
       Title="CategoryTabPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" x:Name="DataGridCategory" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Категория" Binding="{Binding Name}" Width="300"/>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="ButtonEdit" Content="Реактировать" ToolTip="Редактировать данные" Click="ButtonEdit_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="1" x:Name="ButtonAdd" ToolTip="Добавить данные" Content="Добавить" HorizontalAlignment="Left" Click="ButtonAdd_Click"/>
+        <Button Grid.Row="1" x:Name="ButtonDel" ToolTip="Удалить данные" Content="Удалить" HorizontalAlignment="Right" Click="ButtonDel_Click"/>
     </Grid>
 </Page>
