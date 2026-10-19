@@ -66,5 +66,3 @@ namespace GameCatalogue.pages
         }
     }
 }
-    }
-}
