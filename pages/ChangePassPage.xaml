@@ -16,7 +16,7 @@
             <PasswordBox x:Name="PasswordBox" ToolTip="Введите старый пароль"/>
             <Label Content="Новый пароль"/>
             <PasswordBox x:Name="PasswordBoxBRANDNEW" ToolTip="Введите новый пароль"/>
-            <Label Content="СПовторите новый пароль"/>
+            <Label Content="Повторите новый пароль"/>
             <PasswordBox x:Name="PasswordBoxNEWCheck" ToolTip="Повторите новый пароль"/>
             
             <Button x:Name="BTNChangePassword" Content="Change password" ToolTip="Нажмите, чтобы сменить пароль" Click="BTNChangePassword_Click"/>

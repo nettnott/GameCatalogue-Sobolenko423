@@ -9,6 +9,34 @@
       Title="DiagramsPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Диаграмма игр у пользователя -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
+            <Label Content="Пользователь:"/>
+            <ComboBox x:Name="CBuser" ToolTip="Выберите пользователя, чьи игры вы хотите посмотреть" DisplayMemberPath="FIO" SelectionChanged="UpdateChart"/>
+            <Label Content="Тип диаграммы:"/>
+            <ComboBox x:Name="CBdiagrammType" ToolTip="Выберите тип диаграммы" SelectionChanged="UpdateChart">
+                <ComboBoxItem Content=""/>
+                <ComboBoxItem Content=""/>
+            </ComboBox>
+            <StackPanel Orientation="Vertical">
+                <Button x:Name="BTNExcel" Content="Excel" ToolTip="Экспорт в Excel" Click="BTNExcel_Click"/>
+                <Button x:Name="BTNWord" Content="Word" ToolTip="Экспорт в Word" Click="BTNWord_Click"/>
+                <Button x:Name="BTNback" Content="Назад" ToolTip="Вернуться назад" Click="BTNback_Click"/>
+            </StackPanel>
+        </StackPanel>
+        <WindowsFormsHost HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Margin="5">
+            <charts:Chart x:Name="ChartGames">
+                <charts:Chart.Legends>
+                    <charts:Legend>
+
+                    </charts:Legend>
+                </charts:Chart.Legends>
+            </charts:Chart>
+        </WindowsFormsHost>
     </Grid>
 </Page>

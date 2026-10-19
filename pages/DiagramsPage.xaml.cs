@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms.DataVisualization.Charting;
+using Word = Microsoft.Office.Interop.Word;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace GameCatalogue.pages
 {
@@ -23,6 +26,21 @@ namespace GameCatalogue.pages
         public DiagramsPage()
         {
             InitializeComponent();
+        }
+
+        private void BTNExcel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BTNWord_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BTNback_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
