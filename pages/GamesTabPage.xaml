@@ -33,7 +33,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
             <Button x:Name="ButtonAdd" ToolTip="Добавить данные" Content="Добавить" Click="ButtonAdd_Click"/>
             <Button x:Name="ButtonDel" ToolTip="Удалить данные" Content="Удалить" Click="ButtonDel_Click"/>
-            <Button x:Name="ButtonBack" Content="Назад" Click="ButtonBack_Click"/>
+            <Button x:Name="ButtonBack" ToolTip="Назад" Content="Назад" Click="ButtonBack_Click"/>
         </StackPanel>
 
     </Grid>
