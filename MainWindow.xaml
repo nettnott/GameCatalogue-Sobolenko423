@@ -11,29 +11,23 @@
         WindowStyle="SingleBorderWindow" ResizeMode="CanResize"
         Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
-        <!-- Сетка: 2 колонки -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
-            <!-- Левая часть для поиска и страниц -->
             <ColumnDefinition Width="1*"/>
-            <!-- Правая часть для меню (кнопок) -->
         </Grid.ColumnDefinitions>
 
-        <!-- Правое боковое меню (Растянуто на все 3 строки в первой колонке) -->
-        <StackPanel Grid.Column="1" Margin="10">
-            <TextBlock Text="NOTTGAMES" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,30,0,40"/>
-            <Button x:Name="BTNcatalogue" Content="catalogue" Click="BTNcatalogue_Click" Width="300" Height="60" Margin="0,5"/>
-            <Button x:Name="BTNaccount" Content="account" Click="BTNaccount_Click" Width="300" Height="60" Margin="0,5"/>
-            <Button x:Name="BTNadmin" Content="admin" Click="BTNadmin_Click" Width="300" Height="60" Margin="0,5"/>
-            <Button x:Name="BTNLogout" Content="Выйти" Click="BTNLogout_Click" Margin="0,50,0,0" Width="300" Height="60"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="10">
+            <TextBlock Text="NOTTGAMES" FontSize="24" FontWeight="Bold"/>
+            <Button x:Name="BTNcatalogue" ToolTip="Каталог игр" Content="Каталог" Click="BTNcatalogue_Click" Margin="0, 20"/>
+            <Button x:Name="BTNaccount" ToolTip="Аккаунт" Content="Аккаунт" Click="BTNaccount_Click" Margin="0, 20"/>
+            <Button x:Name="BTNadmin" ToolTip="Администрирование" Content="Админка" Click="BTNadmin_Click" Margin="0, 20"/>
+            <Button x:Name="BTNLogout" ToolTip="Выйти из аккаунта" Content="Выйти из аккаунта" Click="BTNLogout_Click" Margin="0, 20"/>
 
-            <!-- Нижняя строка: Дата и время (В самом низу под кнопками) -->
-            <TextBlock x:Name="TBDateTime" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <CheckBox x:Name="ChbTheme" HorizontalAlignment="Center" ToolTip="Сменить тему" Content="Темная тема" Checked="ChbTheme_Checked" Unchecked="ChbTheme_Unchecked"/>
         </StackPanel>
 
-        <!-- Контент страниц (Левая средняя ячейка) -->
+        <TextBlock x:Name="TBDateTime" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
         <Frame Grid.Column="0" x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="10"/>
-
-
     </Grid>
 </Window>

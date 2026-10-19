@@ -1,53 +1,81 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!-- Основные цвета темы -->
+    <!-- Палитра цветов темы -->
     <SolidColorBrush x:Key="BackgroundBrush" Color="#0B0E14"/>
-    <!-- Глубокий темный фон -->
+    <!-- Глубокий темный фон всей страницы -->
     <SolidColorBrush x:Key="PanelBrush" Color="#161A23"/>
-    <!-- Темно-серые неоновые панели -->
+    <!-- Темные киберпанк карточки игр -->
+    <SolidColorBrush x:Key="CardBorderBrush" Color="#00FFCC"/>
+    <!-- Токсично-бирюзовая рамка карточек -->
+    <SolidColorBrush x:Key="ImageBgBrush" Color="#0F121A"/>
+    <!-- Темная подложка под обложку -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="#006B80"/>
     <!-- Неоновый сине-зеленый -->
     <SolidColorBrush x:Key="AccentBrush" Color="#FCEE09"/>
     <!-- Киберпанк желтый -->
     <SolidColorBrush x:Key="TextBrush" Color="#00FFCC"/>
     <!-- Токсично-бирюзовый текст -->
+    <SolidColorBrush x:Key="PriceBrush" Color="#FCEE09"/>
+    <!-- Киберпанк желтая цена -->
+
+    <!-- Автоматический фон страниц -->
+    <Style TargetType="Page">
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+    </Style>
+
+    <!-- Стилизация ListBoxItem (убираем синее выделение при клике) -->
+    <Style TargetType="ListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <ContentPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!-- Стиль для Кнопок -->
     <Style TargetType="Button">
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Padding" Value="8"/>
-        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Padding" Value="15,5"/>
+        <Setter Property="Margin" Value="10,8"/>
         <Setter Property="FontFamily" Value="Open Sans"/>
         <Setter Property="FontSize" Value="12pt"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Background" Value="{StaticResource PanelBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
-        <!-- Желтый текст -->
         <Setter Property="BorderBrush" Value="{StaticResource TextBrush}"/>
-        <!-- Бирюзовая рамка -->
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
     <!-- Стиль для Текстовых полей -->
     <Style TargetType="TextBox">
-        <Setter Property="Height" Value="30"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Margin" Value="0,6,0,12"/>
+        <Setter Property="Padding" Value="8,0"/>
         <Setter Property="FontFamily" Value="Open Sans"/>
+        <Setter Property="FontSize" Value="11pt"/>
         <Setter Property="Background" Value="#0B0E14"/>
         <Setter Property="Foreground" Value="#FFFFFF"/>
         <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
-        <Setter Property="Padding" Value="5,0"/>
+        <Setter Property="BorderThickness" Value="1.5"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
     <!-- Стиль для Выпадающих списков -->
     <Style TargetType="ComboBox">
-        <Setter Property="Height" Value="30"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Margin" Value="0,6,0,12"/>
+        <Setter Property="Padding" Value="8,0"/>
+        <Setter Property="FontFamily" Value="Open Sans"/>
         <Setter Property="Background" Value="{StaticResource PanelBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="1.5"/>
         <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
-    <!-- Стиль для Обычного Текста -->
+    <!-- Стиль для Текста -->
     <Style TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Open Sans"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>

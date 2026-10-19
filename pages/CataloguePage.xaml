@@ -8,7 +8,7 @@
       d:DesignHeight="600" d:DesignWidth="1000"
       Title="CataloguePage">
 
-    <Grid Background="#F5F5F7">
+    <Grid>
         <!-- Сетка: 2 строки (строка поиска и строка каталога) -->
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -41,7 +41,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <!-- Обертка карточки со скруглением углов и рамкой -->
-                    <Border Margin="15" CornerRadius="10" BorderThickness="1" Padding="15" Width="460" MinHeight="160">
+                    <Border Margin="15" CornerRadius="10" BorderThickness="1" Padding="15" Width="460" MinHeight="160" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource CardBorderBrush}">
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -53,7 +53,7 @@
 
                             <!-- Обложка игры (заглушка, если в БД есть пути, например ImagePath) -->
                             <!-- Если у тебя в модели другое название поля картинок, замени ImagePath на него -->
-                            <Border Grid.Column="0" CornerRadius="6" ClipToBounds="True" Background="#EDF2F7">
+                            <Border Grid.Column="0" Background="{DynamicResource ImageBgBrush}" CornerRadius="6" ClipToBounds="True" >
                                 <Image Source="{Binding ImagePath}" Stretch="UniformToFill"/>
                             </Border>
                             <Grid Grid.Column="1" Margin="15,0,0,0">
@@ -78,7 +78,10 @@
                                 <TextBlock Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="60"/>
 
                                 <!-- Цена в самом низу карточки -->
-                                    <TextBlock Grid.Row="3"  Text="{Binding Price}" />
+                                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding Price}" FontSize="15" FontWeight="ExtraBold" Foreground="{DynamicResource PriceBrush}"/>
+                                    <TextBlock Text=" ₽" FontSize="15" FontWeight="ExtraBold" Foreground="{DynamicResource PriceBrush}"/>
+                                </StackPanel>
 
                             </Grid>
                         </Grid>
