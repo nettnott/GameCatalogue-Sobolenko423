@@ -9,7 +9,6 @@
       Title="AddGamePage">
 
     <Grid Margin="20">
-        <!-- Делаем 7 строк для поочередного вывода всех полей и кнопок -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <!-- 0. Название -->
@@ -21,42 +20,38 @@
             <!-- 3. Пользователь -->
             <RowDefinition Height="Auto"/>
             <!-- 4. Категория -->
-            <RowDefinition Height="20"/>
-            <!-- 5. Небольшой отступ -->
             <RowDefinition Height="Auto"/>
             <!-- 6. Кнопки -->
         </Grid.RowDefinitions>
 
-        <!-- Каждое поле заворачиваем в StackPanel, чтобы подпись была над полем ввода -->
-
         <!-- Название игры -->
         <StackPanel Grid.Row="0" Margin="0,5">
-            <TextBlock Text="Название игры" FontWeight="Bold" Margin="0,0,0,3"/>
-            <TextBox x:Name="TBGameName" ToolTip="Название игры" Text="{Binding Name}" Height="25" VerticalContentAlignment="Center"/>
+            <TextBlock Text="Название игры"/>
+            <TextBox x:Name="TBGameName" ToolTip="Название игры" Text="{Binding Name}" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: MEGA-GIGa-KRUTOI shlak"/>
         </StackPanel>
 
         <!-- Описание -->
         <StackPanel Grid.Row="1" Margin="0,5">
-            <TextBlock Text="Описание" FontWeight="Bold" Margin="0,0,0,3"/>
-            <TextBox x:Name="TBDescription" ToolTip="Описание игры" Text="{Binding Description}" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+            <TextBlock Text="Описание"/>
+            <TextBox x:Name="TBDescription" ToolTip="Описание игры" Text="{Binding Description}" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: Все короче мега-гига-круто и нишево" TextWrapping="Wrap" AcceptsReturn="True"/>
         </StackPanel>
 
         <!-- Цена -->
         <StackPanel Grid.Row="2" Margin="0,5">
-            <TextBlock Text="Цена" FontWeight="Bold" Margin="0,0,0,3"/>
-            <TextBox x:Name="TBPrice" ToolTip="Цена игры" Text="{Binding Price}" Height="25" VerticalContentAlignment="Center"/>
+            <TextBlock Text="Цена"/>
+            <TextBox x:Name="TBPrice" ToolTip="Цена игры" Text="{Binding Price}" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: 67"/>
         </StackPanel>
 
         <!-- Пользователь -->
         <StackPanel Grid.Row="3" Margin="0,5">
-            <TextBlock Text="Пользователь (ID)" FontWeight="Bold" Margin="0,0,0,3"/>
-            <ComboBox x:Name="CBUser" SelectedValuePath="ID" ToolTip="Пользователь, добавивший игру" SelectedValue="{Binding UserID}" Height="25" VerticalContentAlignment="Center"/>
+            <TextBlock Text="Пользователь"/>
+            <ComboBox x:Name="CBUser" SelectedValuePath="ID" ToolTip="Пользователь, добавивший игру" SelectedValue="{Binding UserID}"/>
         </StackPanel>
 
         <!-- Категория -->
         <StackPanel Grid.Row="4" Margin="0,5">
-            <TextBlock Text="Категория (ID)" FontWeight="Bold" Margin="0,0,0,3"/>
-            <ComboBox x:Name="CBCategory" SelectedValuePath="ID" ToolTip="Категория игры" SelectedValue="{Binding CategoryID}" Height="25" VerticalContentAlignment="Center"/>
+            <TextBlock Text="Категория (ID)" FontWeight="Bold"/>
+            <ComboBox x:Name="CBCategory" SelectedValuePath="ID" ToolTip="Категория игры" SelectedValue="{Binding CategoryID}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="5">
