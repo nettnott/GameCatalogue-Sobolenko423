@@ -32,37 +32,37 @@
         <!-- Название игры -->
         <StackPanel Grid.Row="0" Margin="0,5">
             <TextBlock Text="Название игры" FontWeight="Bold" Margin="0,0,0,3"/>
-            <TextBox x:Name="TBGameName" Text="{Binding Name}" Height="25" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="TBGameName" ToolTip="Название игры" Text="{Binding Name}" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
 
         <!-- Описание -->
         <StackPanel Grid.Row="1" Margin="0,5">
             <TextBlock Text="Описание" FontWeight="Bold" Margin="0,0,0,3"/>
-            <TextBox x:Name="TBDescription" Text="{Binding Description}" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+            <TextBox x:Name="TBDescription" ToolTip="Описание игры" Text="{Binding Description}" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
         </StackPanel>
 
         <!-- Цена -->
         <StackPanel Grid.Row="2" Margin="0,5">
             <TextBlock Text="Цена" FontWeight="Bold" Margin="0,0,0,3"/>
-            <TextBox x:Name="TBPrice" Text="{Binding Price}" Height="25" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="TBPrice" ToolTip="Цена игры" Text="{Binding Price}" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
 
         <!-- Пользователь -->
         <StackPanel Grid.Row="3" Margin="0,5">
             <TextBlock Text="Пользователь (ID)" FontWeight="Bold" Margin="0,0,0,3"/>
-            <ComboBox x:Name="CBUser" SelectedValuePath="ID" SelectedValue="{Binding UserID}" Height="25" VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="CBUser" SelectedValuePath="ID" ToolTip="Пользователь, добавивший игру" SelectedValue="{Binding UserID}" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
 
         <!-- Категория -->
         <StackPanel Grid.Row="4" Margin="0,5">
             <TextBlock Text="Категория (ID)" FontWeight="Bold" Margin="0,0,0,3"/>
-            <ComboBox x:Name="CBCategory" SelectedValuePath="ID" SelectedValue="{Binding CategoryID}" Height="25" VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="CBCategory" SelectedValuePath="ID" ToolTip="Категория игры" SelectedValue="{Binding CategoryID}" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6">
-            <Button x:Name="ButtonSave" Content="Сохранить" Margin="0,0,10,0" Height="30" Click="ButtonSave_Click"/>
-            <Button x:Name="ButtonClean" Content="Очистить" Margin="10,0,0,0" Height="30" Click="ButtonClean_Click"/>
-            <Button x:Name="ButtonBack" Content="Назад" Margin="10,0,0,0" Height="30" Click="ButtonBack_Click"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="5">
+            <Button x:Name="ButtonSave" ToolTip="Сохранить" Content="Сохранить" Click="ButtonSave_Click"/>
+            <Button x:Name="ButtonClean" ToolTip="Очистить" Content="Очистить" Click="ButtonClean_Click"/>
+            <Button x:Name="ButtonBack" ToolTip="Назад" Content="Назад" Click="ButtonBack_Click"/>
         </StackPanel>
     </Grid>
 </Page>

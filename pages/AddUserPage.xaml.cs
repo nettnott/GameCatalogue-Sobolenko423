@@ -66,7 +66,7 @@ namespace GameCatalogue.pages
             TBPass.Text = "";
             cmbRole.Items.Clear();
             TBFio.Text = "";
-            TBPhoto.Text = "";
+           // TBPhoto.Text = "";
 
         }
 

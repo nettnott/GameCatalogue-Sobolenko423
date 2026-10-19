@@ -64,5 +64,9 @@ namespace GameCatalogue.pages
         {
             NavigationService.Navigate(new AddCategoryPage((sender as Button).DataContext as Category));
         }
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
     }
 }

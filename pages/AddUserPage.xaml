@@ -54,17 +54,17 @@
             <TextBox x:Name="TBFio" Text="{Binding FIO}" ToolTip="Введите ФИО" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
 
-        <!-- Фото -->
+        <!-- Фото 
         <StackPanel Grid.Row="4" Margin="0,5">
             <TextBlock Text="Фото (необязательно)" Margin="0,0,0,3"/>
             <TextBox x:Name="TBPhoto" Text="{Binding Photo}" ToolTip="Добавьте фото" Height="25" VerticalContentAlignment="Center"/>
-        </StackPanel>
+        </StackPanel>-->
 
         <!-- Блок кнопок (Разделен на 2 колонки) -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6">
-            <Button x:Name="ButtonSave" Content="Сохранить" Margin="0,0,10,0" Height="30" Click="ButtonSave_Click"/>
-            <Button x:Name="ButtonClean" Content="Очистить" Margin="10,0,0,0" Height="30" Click="ButtonClean_Click"/>
-            <Button x:Name="ButtonBack" Content="Назад" Margin="10,0,0,0" Height="30" Click="ButtonBack_Click"/>
+            <Button x:Name="ButtonSave" ToolTip="Сохранить" Content="Сохранить" Click="ButtonSave_Click"/>
+            <Button x:Name="ButtonClean" ToolTip="Очистить" Content="Очистить" Click="ButtonClean_Click"/>
+            <Button x:Name="ButtonBack" ToolTip="Назад" Content="Назад" Click="ButtonBack_Click"/>
         </StackPanel>
     </Grid>
 </Page>

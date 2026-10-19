@@ -15,12 +15,12 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Название категории"/>
-            <TextBox x:Name="TBCategoryName" Text="{Binding Name}" />
+            <TextBox x:Name="TBCategoryName" Text="{Binding Name}"  ToolTip="Название категории игры"/>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="ButtonSaveCategory" Content="Сохранить" Click="ButtonSaveCategory_Click"/>
-            <Button x:Name="ButtonClean" Content="Очистить" Click="ButtonClean_Click"/>
-            <Button x:Name="ButtonBack" Content="Назад" Margin="10,0,0,0" Height="30" Click="ButtonBack_Click"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="ButtonSaveCategory" ToolTip="Сохранить" Content="Сохранить" Click="ButtonSaveCategory_Click"/>
+            <Button x:Name="ButtonClean" ToolTip="Очистить" Content="Очистить" Click="ButtonClean_Click"/>
+            <Button x:Name="ButtonBack" ToolTip="Назад" Content="Назад" Click="ButtonBack_Click"/>
         </StackPanel>
     </Grid>
 </Page>
