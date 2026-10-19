@@ -10,10 +10,13 @@
 
     <Grid>
         <StackPanel x:Name="SPUser" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+            <Label Content="ФИО: "/>
             <TextBlock x:Name="TBFIO"/>
+            <Label Content="Логин: "/>
             <TextBlock x:Name="TBLogin"/>
+            <Label Content="Роль: "/>
             <TextBlock x:Name="TBRole"/>
-            <Button x:Name="BTNChangePassword" Content="Change password" ToolTip="Нажмите, чтобы сменить пароль" Click="BTNChangePassword_Click"/>
+            <Button x:Name="BTNChangePassword" Content="Сменить пароль" ToolTip="Нажмите, чтобы сменить пароль" Click="BTNChangePassword_Click"/>
         </StackPanel>
     </Grid>
 </Page>

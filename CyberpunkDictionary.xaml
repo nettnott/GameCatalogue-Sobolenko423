@@ -4,26 +4,31 @@
     <SolidColorBrush x:Key="BackgroundBrush" Color="#0B0E14"/>
     <!-- Глубокий темный фон всей страницы -->
     <SolidColorBrush x:Key="PanelBrush" Color="#161A23"/>
-    <!-- Темные киберпанк карточки игр -->
+    <!-- Темные карточки игр -->
     <SolidColorBrush x:Key="CardBorderBrush" Color="#00FFCC"/>
-    <!-- Токсично-бирюзовая рамка карточек -->
+    <!-- Рамка карточек -->
     <SolidColorBrush x:Key="ImageBgBrush" Color="#0F121A"/>
     <!-- Темная подложка под обложку -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="#006B80"/>
     <!-- Неоновый сине-зеленый -->
     <SolidColorBrush x:Key="AccentBrush" Color="#FCEE09"/>
-    <!-- Киберпанк желтый -->
+    <!-- Желтый -->
     <SolidColorBrush x:Key="TextBrush" Color="#00FFCC"/>
-    <!-- Токсично-бирюзовый текст -->
+    <!-- Текст -->
     <SolidColorBrush x:Key="PriceBrush" Color="#FCEE09"/>
-    <!-- Киберпанк желтая цена -->
+    <!-- Желтая цена -->
 
-    <!-- Автоматический фон страниц -->
+    <!-- Фон страниц -->
     <Style TargetType="Page">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
     </Style>
 
-    <!-- Стилизация ListBoxItem (убираем синее выделение при клике) -->
+    <!-- Фон окна -->
+    <Style TargetType="Window">
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+    </Style>
+
+    <!-- Стилизация ListBoxItem, убирается выделение -->
     <Style TargetType="ListBoxItem">
         <Setter Property="Template">
             <Setter.Value>
@@ -48,8 +53,22 @@
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 
-    <!-- Стиль для Текстовых полей -->
+    <!-- Стиль для Полей ввода текста -->
     <Style TargetType="TextBox">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Margin" Value="0,6,0,12"/>
+        <Setter Property="Padding" Value="8,0"/>
+        <Setter Property="FontFamily" Value="Open Sans"/>
+        <Setter Property="FontSize" Value="11pt"/>
+        <Setter Property="Background" Value="#0B0E14"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Стиль для Полей ввода пароля -->
+    <Style TargetType="PasswordBox">
         <Setter Property="Height" Value="35"/>
         <Setter Property="Margin" Value="0,6,0,12"/>
         <Setter Property="Padding" Value="8,0"/>

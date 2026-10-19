@@ -23,14 +23,17 @@ namespace GameCatalogue.pages
         public AccountPage()
         {
             InitializeComponent();
+            // Присваивание элементам TextBlock данных текущего пользователя через глобальную переменную currentUser
             TBFIO.Text = Lists.currentUser.FIO;
             TBLogin.Text = Lists.currentUser.Login;
             TBRole.Text = Lists.currentUser.Role;
         }
-
+        /// <summary>
+        /// Переход на страницу смены пароля.
+        /// </summary>
         private void BTNChangePassword_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ChangePassPage());
+            NavigationService?.Navigate(new ChangePassPage());
         }
     }
 }
