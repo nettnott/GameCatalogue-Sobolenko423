@@ -16,13 +16,11 @@
 
         <DataGrid Grid.Row="0" x:Name="DataGridPayment" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="50"/>
-
                 <DataGridTextColumn Header="Пользователь" Binding="{Binding Users.FIO}" Width="80" />
-                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="50"/>
-                <DataGridTextColumn Header="Количество" Binding="{Binding Num}" Width="70"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="200"/>
                 <DataGridTextColumn Header="Сумма" Binding="{Binding Price}" Width="80"/>
                 <DataGridTextColumn Header="Категория" Binding="{Binding Category.Name}" Width="80" />
+                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="250"/>
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -33,9 +31,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
-            <Button x:Name="ButtonAdd" ToolTip="Добавить данные" Margin="10,0,0,0" Height="30" Content="Добавить" Click="ButtonAdd_Click"/>
-            <Button x:Name="ButtonDel" ToolTip="Удалить данные" Margin="10,0,0,0" Height="30" Content="Удалить" Click="ButtonDel_Click"/>
-            <Button x:Name="ButtonBack" Content="Назад" Margin="10,0,0,0" Height="30" Click="ButtonBack_Click"/>
+            <Button x:Name="ButtonAdd" ToolTip="Добавить данные" Content="Добавить" Click="ButtonAdd_Click"/>
+            <Button x:Name="ButtonDel" ToolTip="Удалить данные" Content="Удалить" Click="ButtonDel_Click"/>
+            <Button x:Name="ButtonBack" Content="Назад" Click="ButtonBack_Click"/>
         </StackPanel>
 
     </Grid>

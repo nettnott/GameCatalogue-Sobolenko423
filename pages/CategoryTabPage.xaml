@@ -19,16 +19,16 @@
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="ButtonEdit" Content="Реактировать" ToolTip="Редактировать данные" Click="ButtonEdit_Click"></Button>
+                            <Button x:Name="ButtonEdit" Content="Редактировать" ToolTip="Редактировать данные" Click="ButtonEdit_Click"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
-            <Button x:Name="ButtonAdd" ToolTip="Добавить данные" Content="Добавить" Margin="0,0,10,0" Height="30"  Click="ButtonAdd_Click"/>
-            <Button x:Name="ButtonDel" ToolTip="Удалить данные" Content="Удалить" Margin="10,0,0,0" Height="30" Click="ButtonDel_Click"/>
-            <Button x:Name="ButtonBack" ToolTip="Назад" Content="Назад" Margin="10,0,0,0" Height="30" Click="ButtonBack_Click"/>
+            <Button x:Name="ButtonAdd" ToolTip="Добавить данные" Content="Добавить" Click="ButtonAdd_Click"/>
+            <Button x:Name="ButtonDel" ToolTip="Удалить данные" Content="Удалить" Click="ButtonDel_Click"/>
+            <Button x:Name="ButtonBack" ToolTip="Назад" Content="Назад" Click="ButtonBack_Click"/>
         </StackPanel>
     </Grid>
 </Page>
