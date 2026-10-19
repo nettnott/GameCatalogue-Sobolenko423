@@ -56,5 +56,9 @@ namespace GameCatalogue.pages
         {
             TBCategoryName.Text = "";
         }
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
     }
 }

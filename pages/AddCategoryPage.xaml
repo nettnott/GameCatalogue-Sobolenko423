@@ -20,6 +20,7 @@
         <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="ButtonSaveCategory" Content="Сохранить" Click="ButtonSaveCategory_Click"/>
             <Button x:Name="ButtonClean" Content="Очистить" Click="ButtonClean_Click"/>
+            <Button x:Name="ButtonBack" Content="Назад" Margin="10,0,0,0" Height="30" Click="ButtonBack_Click"/>
         </StackPanel>
     </Grid>
 </Page>

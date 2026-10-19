@@ -59,15 +59,10 @@
             <ComboBox x:Name="CBCategory" SelectedValuePath="ID" SelectedValue="{Binding CategoryID}" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
 
-        <!-- Блок кнопок в самом низу (Разделен на 2 колонки, чтобы кнопки стояли рядом) -->
-        <Grid Grid.Row="6">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Button x:Name="ButtonSave" Content="Сохранить" Grid.Column="0" Margin="0,0,10,0" Height="35" Click="ButtonSave_Click"/>
-            <Button x:Name="ButtonClean" Content="Очистить" Grid.Column="1" Margin="10,0,0,0" Height="35" Click="ButtonClean_Click"/>
-        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6">
+            <Button x:Name="ButtonSave" Content="Сохранить" Margin="0,0,10,0" Height="30" Click="ButtonSave_Click"/>
+            <Button x:Name="ButtonClean" Content="Очистить" Margin="10,0,0,0" Height="30" Click="ButtonClean_Click"/>
+            <Button x:Name="ButtonBack" Content="Назад" Margin="10,0,0,0" Height="30" Click="ButtonBack_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

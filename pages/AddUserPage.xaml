@@ -8,34 +8,63 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddUserPage">
 
-    <Grid>
+    <Grid Margin="20">
+        <!-- 7 строк для поочередного вывода всех полей ввода и кнопок -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <!-- 0. Логин -->
+            <RowDefinition Height="Auto"/>
+            <!-- 1. Пароль -->
+            <RowDefinition Height="Auto"/>
+            <!-- 2. Роль -->
+            <RowDefinition Height="Auto"/>
+            <!-- 3. ФИО -->
+            <RowDefinition Height="Auto"/>
+            <!-- 4. Фото -->
+            <RowDefinition Height="20"/>
+            <!-- 5. Небольшой отступ -->
+            <RowDefinition Height="Auto"/>
+            <!-- 6. Кнопки -->
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <TextBlock Text="Логин" Grid.Row="0" Grid.Column="0"/>
-        <TextBlock Text="Пароль" Grid.Row="1" Grid.Column="0"/>
-        <TextBlock Text="Роль" Grid.Row="2" Grid.Column="0"/>
-        <TextBlock Text="ФИО" Grid.Row="3" Grid.Column="0"/>
-        <TextBlock Text="Фото (необязательно)" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" />
-        <TextBox x:Name="TBLogin" Text="{Binding Login}" Grid.Row="0" ToolTip="Введите логин" Grid.Column="1"/>
-        <TextBox x:Name="TBPass" Text="{Binding Password}" Grid.Column="1" ToolTip="Введите пароль" Grid.Row="1" />
-        <ComboBox Name="cmbRole" SelectedItem="{Binding Role}" ToolTip="Ввыберите роль" Grid.Row="2" Grid.Column="1">
-            <ComboBoxItem Content="ADMIN" />
-            <ComboBoxItem Content="USER" />
-        </ComboBox>
-        <TextBox x:Name="TBFio" Text="{Binding FIO}" Grid.Row="3" ToolTip="Введите ФИО" Grid.Column="1"/>
-        <TextBox x:Name="TBPhoto" Text="{Binding Photo}" Grid.Row="4" ToolTip="Добавьте фото" Grid.Column="1"/>
-        <Button x:Name="ButtonSave" Content="Сохранить" Grid.Row="5" Click="ButtonSave_Click" Grid.ColumnSpan="2" HorizontalAlignment="Right" />
-        <Button x:Name="ButtonClean" Content="Очистить" Grid.Row="5" Click="ButtonClean_Click" Grid.ColumnSpan="2" Margin="50,0,0,0" HorizontalAlignment="Left" />
+
+        <!-- Логин -->
+        <StackPanel Grid.Row="0" Margin="0,5">
+            <TextBlock Text="Логин" Margin="0,0,0,3"/>
+            <TextBox x:Name="TBLogin" Text="{Binding Login}" ToolTip="Введите логин" Height="25" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Пароль -->
+        <StackPanel Grid.Row="1" Margin="0,5">
+            <TextBlock Text="Пароль" Margin="0,0,0,3"/>
+            <TextBox x:Name="TBPass" Text="{Binding Password}" ToolTip="Введите пароль" Height="25" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Роль -->
+        <StackPanel Grid.Row="2" Margin="0,5">
+            <TextBlock Text="Роль" Margin="0,0,0,3"/>
+            <ComboBox x:Name="cmbRole" SelectedValue="{Binding Role}" SelectedValuePath="Content" ToolTip="Выберите роль" Height="25" VerticalContentAlignment="Center">
+                <ComboBoxItem Content="ADMIN" />
+                <ComboBoxItem Content="USER" />
+            </ComboBox>
+        </StackPanel>
+
+        <!-- ФИО -->
+        <StackPanel Grid.Row="3" Margin="0,5">
+            <TextBlock Text="ФИО" Margin="0,0,0,3"/>
+            <TextBox x:Name="TBFio" Text="{Binding FIO}" ToolTip="Введите ФИО" Height="25" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Фото -->
+        <StackPanel Grid.Row="4" Margin="0,5">
+            <TextBlock Text="Фото (необязательно)" Margin="0,0,0,3"/>
+            <TextBox x:Name="TBPhoto" Text="{Binding Photo}" ToolTip="Добавьте фото" Height="25" VerticalContentAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Блок кнопок (Разделен на 2 колонки) -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6">
+            <Button x:Name="ButtonSave" Content="Сохранить" Margin="0,0,10,0" Height="30" Click="ButtonSave_Click"/>
+            <Button x:Name="ButtonClean" Content="Очистить" Margin="10,0,0,0" Height="30" Click="ButtonClean_Click"/>
+            <Button x:Name="ButtonBack" Content="Назад" Margin="10,0,0,0" Height="30" Click="ButtonBack_Click"/>
+        </StackPanel>
     </Grid>
 </Page>

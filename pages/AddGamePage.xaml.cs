@@ -73,5 +73,9 @@ namespace GameCatalogue.pages
             CBCategory.SelectedIndex = 0;
             CBUser.SelectedIndex = 0;
         }
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
     }
 }
