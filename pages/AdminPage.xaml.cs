@@ -20,6 +20,9 @@ namespace GameCatalogue.pages
     /// </summary>
     public partial class AdminPage : Page
     {
+        /// <summary>
+        /// Обрабатывает нажатие на кнопки и перенаправляет пользователя на соответствующие страницы
+        /// </summary>
         public AdminPage()
         {
             InitializeComponent();
