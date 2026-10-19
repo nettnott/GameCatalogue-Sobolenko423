@@ -50,7 +50,9 @@ namespace GameCatalogue.pages
                 MessageBox.Show("Введите название категории!");
                 return;
             }
-            
+
+            _currentCategory.Name = TBCategoryName.Text;
+
             if (_currentCategory.ID == 0)
                 Core.Context.Category.Add(_currentCategory);
 

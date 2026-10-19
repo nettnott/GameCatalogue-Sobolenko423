@@ -9,7 +9,6 @@
       Title="AddUserPage">
 
     <Grid Margin="20">
-        <!-- 7 строк для поочередного вывода всех полей ввода и кнопок -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <!-- 0. Логин -->
@@ -20,29 +19,25 @@
             <RowDefinition Height="Auto"/>
             <!-- 3. ФИО -->
             <RowDefinition Height="Auto"/>
-            <!-- 4. Фото -->
-            <RowDefinition Height="20"/>
-            <!-- 5. Небольшой отступ -->
-            <RowDefinition Height="Auto"/>
-            <!-- 6. Кнопки -->
+            <!-- 4. Кнопки -->
         </Grid.RowDefinitions>
 
         <!-- Логин -->
         <StackPanel Grid.Row="0" Margin="0,5">
-            <TextBlock Text="Логин" Margin="0,0,0,3"/>
-            <TextBox x:Name="TBLogin" Text="{Binding Login}" ToolTip="Введите логин" Height="25" VerticalContentAlignment="Center"/>
+            <TextBlock Text="Логин"/>
+            <TextBox x:Name="TBLogin" Text="{Binding Login}" ToolTip="Введите логин" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: MegaSigma"/>
         </StackPanel>
 
         <!-- Пароль -->
         <StackPanel Grid.Row="1" Margin="0,5">
-            <TextBlock Text="Пароль" Margin="0,0,0,3"/>
-            <TextBox x:Name="TBPass" Text="{Binding Password}" ToolTip="Введите пароль" Height="25" VerticalContentAlignment="Center"/>
+            <TextBlock Text="Пароль"/>
+            <TextBox x:Name="TBPass" Text="{Binding Password}" ToolTip="Введите пароль" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: 67mega67"/>
         </StackPanel>
 
         <!-- Роль -->
         <StackPanel Grid.Row="2" Margin="0,5">
-            <TextBlock Text="Роль" Margin="0,0,0,3"/>
-            <ComboBox x:Name="cmbRole" SelectedValue="{Binding Role}" SelectedValuePath="Content" ToolTip="Выберите роль" Height="25" VerticalContentAlignment="Center">
+            <TextBlock Text="Роль"/>
+            <ComboBox x:Name="cmbRole" SelectedValue="{Binding Role}" SelectedValuePath="Content" ToolTip="Выберите роль">
                 <ComboBoxItem Content="ADMIN" />
                 <ComboBoxItem Content="USER" />
             </ComboBox>
@@ -50,18 +45,11 @@
 
         <!-- ФИО -->
         <StackPanel Grid.Row="3" Margin="0,5">
-            <TextBlock Text="ФИО" Margin="0,0,0,3"/>
-            <TextBox x:Name="TBFio" Text="{Binding FIO}" ToolTip="Введите ФИО" Height="25" VerticalContentAlignment="Center"/>
+            <TextBlock Text="ФИО"/>
+            <TextBox x:Name="TBFio" Text="{Binding FIO}" ToolTip="Введите ФИО" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: Сигмов Сигма Сигмович"/>
         </StackPanel>
-
-        <!-- Фото 
-        <StackPanel Grid.Row="4" Margin="0,5">
-            <TextBlock Text="Фото (необязательно)" Margin="0,0,0,3"/>
-            <TextBox x:Name="TBPhoto" Text="{Binding Photo}" ToolTip="Добавьте фото" Height="25" VerticalContentAlignment="Center"/>
-        </StackPanel>-->
-
-        <!-- Блок кнопок (Разделен на 2 колонки) -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="6">
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4">
             <Button x:Name="ButtonSave" ToolTip="Сохранить" Content="Сохранить" Click="ButtonSave_Click"/>
             <Button x:Name="ButtonClean" ToolTip="Очистить" Content="Очистить" Click="ButtonClean_Click"/>
             <Button x:Name="ButtonBack" ToolTip="Назад" Content="Назад" Click="ButtonBack_Click"/>
