@@ -20,52 +20,56 @@ namespace GameCatalogue.pages
     /// </summary>
     public partial class CataloguePage : Page
     {
+        /// <summary>
+        /// Вызывает функцию загрузки категорий, выбирает изначальную сортировку
+        /// </summary>
         public CataloguePage()
         {
             InitializeComponent();
-
-            // ИСПРАВЛЕНО: Убрана лишняя строка привязки, которая ломала "Все жанры"
             LoadCategories();
 
             CBSort.SelectedIndex = 0;
 
             UpdateSearch();
         }
-
+        /// <summary>
+        /// Функция загрузки категорий.
+        /// Создается переменная для нового списка категорий, в котором задается первый элемент - все жанры.
+        /// В этот список добавляется список категорий из БД.
+        /// Список назначается источником для ComboBox, определяется отображаемая величина и выбранная. Задается базовый выбранный элемент
+        /// </summary>
         private void LoadCategories()
         {
             if (Lists.categoriesDBL == null) return;
 
-            // 1. Создаем новый временный список, куда первым элементом пишем заглушку
             var displayCategories = new List<Category>();
             displayCategories.Add(new Category { ID = 0, Name = "Все жанры" });
 
-            // 2. Добавляем в этот список все реальные жанры из вашей БД
             displayCategories.AddRange(Lists.categoriesDBL);
 
-            // 3. Привязываем получившийся список к ComboBox
             CBFilter.ItemsSource = displayCategories;
             CBFilter.DisplayMemberPath = "Name";
-            CBFilter.SelectedValuePath = "ID";   // ИСПРАВЛЕНО: Регистр ID должен совпадать с тем, что в базе
+            CBFilter.SelectedValuePath = "ID";
 
-            // 4. Автоматически выбираем самый первый элемент — "Все жанры"
             CBFilter.SelectedIndex = 0;
         }
-
+        /// <summary>
+        /// Обновляет данные для ListBox при вводе поискового запроса/сортировки/фильтра
+        /// </summary>
         private void UpdateSearch()
         {
             if (Lists.gamesDBL == null) return;
 
-            // ИСПРАВЛЕНО: Делаем переменную типом IEnumerable, чтобы LINQ-методы могли спокойно перезаписывать данные
             IEnumerable<Games> filteredGames = Lists.gamesDBL;
 
+            // Выборка игр, где имя соответствует поиску
             if (!string.IsNullOrWhiteSpace(TBSearch.Text))
             {
                 string searchText = TBSearch.Text.ToLower().Trim();
                 filteredGames = filteredGames.Where(g => g.Name != null && g.Name.ToLower().Contains(searchText));
             }
 
-            // 3. ПРИМЕНЯЕМ ФИЛЬТР ПО ЖАНРУ
+            // Применение фильтра по жанру
             if (CBFilter.SelectedItem is Category selectedCategory)
             {
                 if (selectedCategory.Name != "Все жанры")
@@ -74,7 +78,7 @@ namespace GameCatalogue.pages
                 }
             }
 
-            // 4. ПРИМЕНЯЕМ СОРТИРОВКУ ПО АЛФАВИТУ
+            // Сортиковка по алфавиту
             if (CBSort.SelectedIndex == 1) // А — Я
             {
                 filteredGames = filteredGames.OrderBy(g => g.Name);
@@ -84,10 +88,13 @@ namespace GameCatalogue.pages
                 filteredGames = filteredGames.OrderByDescending(g => g.Name);
             }
 
-            // 5. Отдаем итоговый отфильтрованный список в ListBox карточек
+            // Возвращение итогового списка
             LBCatalogue.ItemsSource = filteredGames.ToList();
         }
-
+        /// <summary>
+        /// Обрабатывает изменения текста в поисковой строке или выбора элемента ComboBox.
+        /// Вызывает функцию обновления каталога.
+        /// </summary>
         private void TBSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateSearch();

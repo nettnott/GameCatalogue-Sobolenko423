@@ -9,75 +9,52 @@
       Title="CataloguePage">
 
     <Grid>
-        <!-- Сетка: 2 строки (строка поиска и строка каталога) -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <!-- Фиксированная высота для поиска -->
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <!-- Всё оставшееся место под каталог игр -->
         </Grid.RowDefinitions>
 
-        <!-- Верхняя панель: Поиск (Строка 0) -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0">
-            <TextBox x:Name="TBSearch" ToolTip="Вы можете искать!!" TextChanged="TBSearch_TextChanged" Width="350" Height="35" VerticalContentAlignment="Center"/>
-            <ComboBox x:Name="CBSort" ToolTip="Выберите сортировку" Width="180" Height="30" SelectionChanged="CBSort_SelectionChanged">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBox x:Name="TBSearch" ToolTip="Вы можете искать!!" Margin="20, 0" TextChanged="TBSearch_TextChanged" Width="350" Height="35" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Введите название игры"/>
+            <ComboBox x:Name="CBSort" ToolTip="Выберите сортировку" Margin="20, 0" SelectionChanged="CBSort_SelectionChanged">
                 <ComboBoxItem>A-Z</ComboBoxItem>
                 <ComboBoxItem>Z-A</ComboBoxItem>
             </ComboBox>
-            <ComboBox x:Name="CBFilter" ToolTip="Фильтр по жанру"  Width="180" Height="30" SelectionChanged="CBFilter_SelectionChanged"/>
+            <ComboBox x:Name="CBFilter" ToolTip="Фильтр по жанру" Margin="20, 0" SelectionChanged="CBFilter_SelectionChanged"/>
         </StackPanel>
 
-        <!-- Каталог игр (Строка 1) -->
         <ListBox x:Name="LBCatalogue" Grid.Row="1" Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
-
-            <!-- Отображение элементов плиткой в 2 колонки -->
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="2"/>
+                    <UniformGrid Columns="2" Background="{DynamicResource BackgroundBrush}"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             
-            <!-- Шаблон карточки игры -->
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <!-- Обертка карточки со скруглением углов и рамкой -->
-                    <Border Margin="15" CornerRadius="10" BorderThickness="1" Padding="15" Width="460" MinHeight="160" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource CardBorderBrush}">
+                    <Border Margin="15" CornerRadius="10" BorderThickness="1" Padding="15" Width="400" MinHeight="160" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource CardBorderBrush}">
 
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="110"/>
-                                <!-- Обложка игры -->
                                 <ColumnDefinition Width="*"/>
-                                <!-- Информация -->
                             </Grid.ColumnDefinitions>
 
-                            <!-- Обложка игры (заглушка, если в БД есть пути, например ImagePath) -->
-                            <!-- Если у тебя в модели другое название поля картинок, замени ImagePath на него -->
                             <Border Grid.Column="0" Background="{DynamicResource ImageBgBrush}" CornerRadius="6" ClipToBounds="True" >
                                 <Image Source="{Binding ImagePath}" Stretch="UniformToFill"/>
                             </Border>
                             <Grid Grid.Column="1" Margin="15,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
-                                    <!-- Название -->
                                     <RowDefinition Height="Auto"/>
-                                    <!-- Категория -->
                                     <RowDefinition Height="*"/>
-                                    <!-- Описание -->
                                     <RowDefinition Height="Auto"/>
-                                    <!-- Цена -->
                                 </Grid.RowDefinitions>
 
-                                <!-- Название игры -->
                                 <TextBlock Grid.Row="0" Text="{Binding Name}"/>
-
-                                <!-- Жанр / Категория -->
                                 <TextBlock Grid.Row="1" Text="{Binding Category.Name}" />
-
-                                <!-- Описание с автообрезкой под размер карточки -->
                                 <TextBlock Grid.Row="2" Text="{Binding Description}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" MaxHeight="60"/>
 
-                                <!-- Цена в самом низу карточки -->
                                 <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
                                     <TextBlock Text="{Binding Price}" FontSize="15" FontWeight="ExtraBold" Foreground="{DynamicResource PriceBrush}"/>
                                     <TextBlock Text=" ₽" FontSize="15" FontWeight="ExtraBold" Foreground="{DynamicResource PriceBrush}"/>
