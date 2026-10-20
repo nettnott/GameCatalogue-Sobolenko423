@@ -10,9 +10,9 @@
 
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
-            <Button x:Name="BTNTabUsers" Content="Таблица пользователей" ToolTip="Просмотр всех пользователей" Click="BTNTabUsers_Click" />
-            <Button x:Name="BTNTabCategory" Content="Таблица категорий" ToolTip="Просмотр категорий" Click="BTNTabCategory_Click"/>
-            <Button x:Name="BTNTabGames" Content="Таблица игр" ToolTip="Просмотр игр" Click="BTNTabGames_Click"/>
+            <Button x:Name="BTNTabUsers" Content="Пользователи" ToolTip="Просмотр всех пользователей" Click="BTNTabUsers_Click" />
+            <Button x:Name="BTNTabCategory" Content="Категории" ToolTip="Просмотр категорий" Click="BTNTabCategory_Click"/>
+            <Button x:Name="BTNTabGames" Content="Игры" ToolTip="Просмотр игр" Click="BTNTabGames_Click"/>
             <Button x:Name="BTNDiagrams" Content="Диаграммы" ToolTip="Просмотр диаграмм" Click="BTNDiagrams_Click"/>
 
         </StackPanel>

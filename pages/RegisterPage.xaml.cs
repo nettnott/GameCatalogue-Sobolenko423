@@ -151,6 +151,14 @@ namespace GameCatalogue.pages
                 x.ToString("X2")));
             }
         }
+        /// <summary>
+        /// Обрабатывает нажатие на кнопку назад.
+        /// Перекидывает пользователя на предыдущую страницу.
+        /// </summary>
+        private void ButtonBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.GoBack();
+        }
     }
 }
 

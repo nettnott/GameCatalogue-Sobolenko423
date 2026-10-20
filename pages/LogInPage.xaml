@@ -33,7 +33,7 @@
             <Label Content="Логин" x:Name="labelLogin"/>
             <TextBox x:Name="TBLogin" ToolTip="Введите логин" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: sasa"/>
             <Label Content="Пароль" x:Name="labelPass"/>
-            <PasswordBox x:Name="PasswordBox" ToolTip="Введите пароль" Style="{StaticResource PlaceholderPasswordBoxStyle}" Tag="Например: 67SWAGA67"/>
+            <PasswordBox x:Name="PasswordBox" ToolTip="Введите пароль"/>
             <Button x:Name="BTNEnter" Content="Войти" ToolTip="Нажмите, чтобы войти" Margin="0, 10" Click="BTNEnter_Click" />
             <Button x:Name="BTNReg" Content="Создать аккаунт" ToolTip="Нажмите, чтобы создать аккаунт" Margin="0, 10" Click="BTNReg_Click"/>
             <Button x:Name="BTNChangePassword" Content="Сменить пароль" ToolTip="Нажмите, чтобы сменить пароль" Margin="0,10" Click="BTNChangePassword_Click"/>

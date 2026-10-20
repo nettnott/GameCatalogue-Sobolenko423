@@ -32,7 +32,7 @@
             
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="15" CornerRadius="10" BorderThickness="1" Padding="15" Width="400" MinHeight="160" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource CardBorderBrush}">
+                    <Border Margin="15" CornerRadius="10" BorderThickness="1" Padding="15" Width="400" Height="200" Background="{DynamicResource PanelBrush}" BorderBrush="{DynamicResource CardBorderBrush}">
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -40,7 +40,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Border Grid.Column="0" Background="{DynamicResource ImageBgBrush}" CornerRadius="6" ClipToBounds="True" >
+                            <Border Grid.Column="0" Background="{DynamicResource ImageBgBrush}" CornerRadius="6" ClipToBounds="True">
                                 <Image Source="{Binding ImagePath}" Stretch="UniformToFill"/>
                             </Border>
                             <Grid Grid.Column="1" Margin="15,0,0,0">

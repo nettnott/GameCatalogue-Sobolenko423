@@ -27,10 +27,13 @@
                 <ComboBoxItem Content="USER" />
                 <ComboBoxItem Content="ADMIN" />
             </ComboBox>
-            <PasswordBox x:Name="passBxFrst" ToolTip="Введите пароль" Style="{StaticResource PlaceholderPasswordBoxStyle}" Tag="Например: 67SWAGA67"/>
-            <PasswordBox x:Name="passBxScnd" ToolTip="Повторите пароль"  Style="{StaticResource PlaceholderPasswordBoxStyle}" Tag="Например: 67SWAGA67"/>
+            <PasswordBox x:Name="passBxFrst" ToolTip="Введите пароль"/>
+            <PasswordBox x:Name="passBxScnd" ToolTip="Повторите пароль"/>
             <TextBox x:Name="TBFIO" ToolTip="Введите ФИО" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: Sasalelel Sasalow"/>
         </StackPanel>
-        <Button Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" x:Name="regButton" ToolTip="Создать аккаунт" Content="Создать аккаунт" Click="regButton_Click"/> 
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button x:Name="regButton" ToolTip="Создать аккаунт" Content="Создать аккаунт" Click="regButton_Click"/>
+            <Button x:Name="ButtonBack" Content="Назад" ToolTip="Назад" Click="ButtonBack_Click"/>
+        </StackPanel>
     </Grid>
 </Page>
