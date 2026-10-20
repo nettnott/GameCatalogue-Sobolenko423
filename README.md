@@ -20,16 +20,25 @@ db/ — скрипт создания и заполнения базы данн�
 res/ — ресурсы приложения (иконки icon.ico, icon.jpg).
 
 Pages/ — страницы приложения:
+
 AccountPage — профиль пользователя.
+
 LoginPage, RegisterPage, ChangePassPage — авторизация, регистрация и смена пароля.
+
 CataloguePage — просмотр каталога.
+
 AdminPage — страница администратора со ссылками на страницы для управления.
+
 AddGamePage, AddCategoryPage, AddUserPage — страницы для добавления данных в БД или их редактирования.
+
 UsersTabPage, CategoryTabPage, GamesTabPage — данные из БД с возможностью редактирования.
+
 DiagramsPage — статистика и графики.
+
 Core.cs — работа с базой данных (контекст EF).
 
 Lists.cs — статический класс для хранения текущего пользователя и списков, полученных из БД (для привязки данных).
+
 LightDictionary.xaml, CyberpunkDictionary.xaml — словари стилей оформления.
 
 ### Запуск
