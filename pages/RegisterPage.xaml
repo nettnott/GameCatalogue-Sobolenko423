@@ -15,22 +15,22 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Введите логин" />
-            <Label Content="Выберите роль"/>
-            <Label Content="Подтвердите пароль"/>
-            <Label Content="Введите пароль"/>
-            <Label Content="Введите ФИО"/>
+            <Label Content="Введите логин" Margin="10"/>
+            <Label Content="Выберите роль" Margin="10"/>
+            <Label Content="Подтвердите пароль" Margin="10"/>
+            <Label Content="Введите пароль" Margin="10"/>
+            <Label Content="Введите ФИО" Margin="10"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox x:Name="TBLog" ToolTip="Введите логин или почту" Width="180" Height="30"/>
-            <ComboBox x:Name="CBRole" ToolTip="Выберите роль" Width="180" Height="30">
+            <TextBox x:Name="TBLog" ToolTip="Введите логин" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: sasa" />
+            <ComboBox x:Name="CBRole" ToolTip="Выберите роль">
                 <ComboBoxItem Content="USER" />
                 <ComboBoxItem Content="ADMIN" />
             </ComboBox>
-            <PasswordBox x:Name="passBxFrst" ToolTip="Введите пароль" Width="180" Height="30"/>
-            <PasswordBox x:Name="passBxScnd" ToolTip="Повторите пароль" Width="180" Height="30"/>
-            <TextBox x:Name="TBFIO" ToolTip="Введите ФИО" Width="180" Height="30"/>
+            <PasswordBox x:Name="passBxFrst" ToolTip="Введите пароль" Style="{StaticResource PlaceholderPasswordBoxStyle}" Tag="Например: 67SWAGA67"/>
+            <PasswordBox x:Name="passBxScnd" ToolTip="Повторите пароль"  Style="{StaticResource PlaceholderPasswordBoxStyle}" Tag="Например: 67SWAGA67"/>
+            <TextBox x:Name="TBFIO" ToolTip="Введите ФИО" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: Sasalelel Sasalow"/>
         </StackPanel>
-        <Button Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" x:Name="regButton" ToolTip="Создать аккаунт" Content="Register" Width="150" Height="30" Click="regButton_Click"/> 
+        <Button Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" x:Name="regButton" ToolTip="Создать аккаунт" Content="Создать аккаунт" Click="regButton_Click"/> 
     </Grid>
 </Page>

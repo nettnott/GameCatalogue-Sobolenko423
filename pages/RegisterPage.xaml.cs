@@ -21,14 +21,20 @@ namespace GameCatalogue.pages
     /// </summary>
     public partial class RegisterPage : Page
     {
+        /// <summary>
+        /// Заадет дефолтный индекс, выбранный в ComboBox
+        /// </summary>
         public RegisterPage()
         {
             InitializeComponent();
             CBRole.SelectedIndex = 0;
         }
+        /// <summary>
+        /// Проверяет соответствие пароля требованиям безопасности
+        /// </summary>
         private bool CheckPSW(String password1, String password2)
         {
-            // 1. Проверяем длину (минимум 6 символов)
+            // Проверяет длину (минимум 6 символов)
             if (password1.Length < 6)
             {
                 MessageBox.Show("Пароль слишком короткий, должно быть минимум 6 символов!");
@@ -38,7 +44,7 @@ namespace GameCatalogue.pages
             bool hasDigit = false;
             bool onlyEnglish = true;
 
-            // 2. Проверяем состав пароля за один цикл
+            // Проверяет состав пароля за один цикл
             foreach (char c in password1)
             {
                 if (char.IsDigit(c))
@@ -63,7 +69,7 @@ namespace GameCatalogue.pages
                 return false;
             }
 
-            // 3. Проверяем совпадение паролей
+            // Проверяет совпадение паролей
             if (password1 != password2)
             {
                 MessageBox.Show("Пароли не совпадают!");
@@ -72,7 +78,12 @@ namespace GameCatalogue.pages
 
             return true;
         }
-
+        /// <summary>
+        /// Обрабатывает нажатие на кнопку регистрации.
+        /// Проверяет все ли поля заполнены, проверяет пароль на соответствие требованиям безопасности.
+        /// Ищет, сеть ли юзер с таким логином.
+        /// Если нет - через try-catch создает нового пользователя, очищает все поля и перекидывает на страницу авторизации
+        /// </summary>
         private void regButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(TBLog.Text) ||
@@ -118,10 +129,7 @@ namespace GameCatalogue.pages
                     TBFIO.Clear();
                     CBRole.SelectedIndex = 0;
 
-                    if (Application.Current.MainWindow is MainWindow mainWindow)
-                    {
-                        mainWindow.UpdateMenuVisibility();
-                    }
+                    NavigationService?.Navigate(new LogInPage());
 
                 }
                 catch (Exception ex)
@@ -131,6 +139,9 @@ namespace GameCatalogue.pages
             }
 
         }
+        /// <summary>
+        /// Хэширование пароля
+        /// </summary>
         public static string GetHash(String password)
         {
             using (var hash = SHA1.Create())

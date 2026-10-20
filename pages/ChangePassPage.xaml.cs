@@ -76,8 +76,7 @@ namespace GameCatalogue.pages
             }
         }
         /// <summary>
-        /// Обрабатывает нажатие на кнопку добавления.
-        /// Перекидывает пользователя на страницу добавления категории и передает туда значение "null"
+        /// Проверяет соответствие пароля требованиям безопасности
         /// </summary>
         private bool CheckPSW(String password1, String password2)
         {
