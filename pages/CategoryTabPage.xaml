@@ -10,16 +10,16 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="DataGridCategory" AutoGenerateColumns="False" IsReadOnly="True">
+        <DataGrid Grid.Row="0" Background="{DynamicResource BackgroundBrush}" x:Name="DataGridCategory" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Категория" Binding="{Binding Name}" Width="300"/>
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="ButtonEdit" Content="Редактировать" ToolTip="Редактировать данные" Click="ButtonEdit_Click"></Button>
+                            <Button x:Name="ButtonEdit" Content="Редактировать" ToolTip="Редактировать данные" Click="ButtonEdit_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
