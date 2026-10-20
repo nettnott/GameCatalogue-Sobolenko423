@@ -15,13 +15,18 @@ namespace GameCatalogue.pages
     /// </summary>
     public partial class DiagramsPage : Page
     {
+        /// <summary>
+        /// Выводит диаграмму и базово заполняет данными.
+        /// </summary>
         public DiagramsPage()
         {
             InitializeComponent();
 
+            //Очищение области диаграммы и добавление новой
             ChartGames.ChartAreas.Clear();
             ChartGames.ChartAreas.Add(new ChartArea("Main"));
 
+            //Настройка серии данных
             var currentSeries = new Series("Количество игр")
             {
                 IsValueShownAsLabel = true
@@ -29,25 +34,31 @@ namespace GameCatalogue.pages
             ChartGames.Series.Clear();
             ChartGames.Series.Add(currentSeries);
 
+            //Связывание БД с диаграммой и заполнение ComboBox всеми возможными видами диаграмм
             CBuser.ItemsSource = Lists.usersDBL;
             CBdiagrammType.ItemsSource = Enum.GetValues(typeof(SeriesChartType));
 
+            //Дефолтный выбор
             CBdiagrammType.SelectedItem = SeriesChartType.Column;
         }
-
+        /// <summary>
+        /// Обновление диаграммы 
+        /// </summary>
         private void UpdateChart(object sender, SelectionChangedEventArgs e)
         {
-            if (CBuser.SelectedItem is Users currentUser &&
-                CBdiagrammType.SelectedItem is SeriesChartType currentType)
+            //Проверяет, что выбраны юзер и тип диаграммы
+            if (CBuser.SelectedItem is Users currentUser && CBdiagrammType.SelectedItem is SeriesChartType currentType)
             {
                 Series currentSeries = ChartGames.Series.FirstOrDefault();
                 if (currentSeries == null) return;
-
+                
+                //Выбирает тип диаграммы и очищает старые точки
                 currentSeries.ChartType = currentType;
                 currentSeries.Points.Clear();
 
                 if (Lists.categoriesDBL == null || Lists.gamesDBL == null) return;
 
+                //Алгоритм подсчета игр, если есть хотя бы одна игра по жанру 
                 foreach (var category in Lists.categoriesDBL)
                 {
                     int gamesCount = Lists.gamesDBL.Count(g => g.UserID == currentUser.ID && g.CategoryID == category.ID);
@@ -59,9 +70,12 @@ namespace GameCatalogue.pages
                 }
             }
         }
-
+        /// <summary>
+        /// Экспорт в эксель
+        /// </summary>
         private void BTNExcel_Click(object sender, RoutedEventArgs e)
         {
+            //Проверяет есть ли данные и присваивает их новым переменным
             if (Lists.usersDBL == null || Lists.categoriesDBL == null || Lists.gamesDBL == null)
             {
                 MessageBox.Show("Данные базы данных не загружены!");
@@ -71,20 +85,20 @@ namespace GameCatalogue.pages
             var allUsers = Lists.usersDBL;
             var allCategories = Lists.categoriesDBL;
 
-            // 1. Создаем объект приложения Excel и новую книгу
+            // Создается объект приложения Excel и новую книгу
             var excelApp = new Excel.Application();
             Excel.Workbook workbook = excelApp.Workbooks.Add();
 
             try
             {
-                // Перебираем пользователей и для каждого генерируем данные
+                // Перебираются пользователи и для каждого генерируем данные
                 for (int uIndex = 0; uIndex < allUsers.Count; uIndex++)
                 {
                     var user = allUsers[uIndex];
                     Excel.Worksheet worksheet;
 
                     // В новой книге Excel по умолчанию уже есть один лист. 
-                    // Используем его для первого юзера, а для остальных — создаем новые.
+                    // Он используется для первого юзера, а для остальных — создаются новые.
                     if (uIndex == 0)
                     {
                         worksheet = (Excel.Worksheet)workbook.Sheets[1];
@@ -94,23 +108,23 @@ namespace GameCatalogue.pages
                         worksheet = (Excel.Worksheet)workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count]);
                     }
 
-                    // Именуем лист по ФИО пользователя (Excel не любит имена длиннее 31 символа, обрезаем на всякий случай)
+                    // Лист именуется по ФИО пользователя, на всякий случай обрезается
                     string sheetName = !string.IsNullOrWhiteSpace(user.FIO) ? user.FIO : $"Пользователь {user.ID}";
                     if (sheetName.Length > 30) sheetName = sheetName.Substring(0, 30);
                     worksheet.Name = sheetName;
 
-                    // 2. Создаем шапку и название таблицы
+                    // Создается шапка и название таблицы
                     worksheet.Cells[1, 1] = $"Статистика добавленных игр: {user.FIO}";
                     worksheet.Cells[3, 1] = "Категория (Жанр)";
                     worksheet.Cells[3, 2] = "Количество игр";
 
-                    // 3. Заполняем строки данными по категориям
+                    // Заполняются строки данными по категориям
                     int currentRow = 4;
                     for (int i = 0; i < allCategories.Count; i++)
                     {
                         var currentCategory = allCategories[i];
 
-                        // Считаем игры из глобального списка для текущего юзера и текущей категории
+                        // Подсчет игр из глобального списка для текущего юзера и текущей категории
                         int gamesCount = Lists.gamesDBL.Count(g => g.UserID == user.ID && g.CategoryID == currentCategory.ID);
 
                         worksheet.Cells[currentRow, 1] = currentCategory.Name;
@@ -118,20 +132,19 @@ namespace GameCatalogue.pages
                         currentRow++;
                     }
 
-                    // 4. Дополнительная статистика (Самая дорогая игра)
+                    // Дополнительная статистика (Самая дорогая игра)
                     var userGames = Lists.gamesDBL.Where(g => g.UserID == user.ID).ToList();
                     var maxPriceGame = userGames.OrderByDescending(g => g.Price).FirstOrDefault();
 
                     if (maxPriceGame != null)
                     {
-                        currentRow++; // Пропускаем пустую строку
+                        currentRow++;
                         worksheet.Cells[currentRow, 1] = "Самая дорогая игра:";
                         worksheet.Cells[currentRow, 2] = maxPriceGame.Name;
 
                         currentRow++;
                         worksheet.Cells[currentRow, 1] = "Стоимость:";
 
-                        // ИСПРАВЛЕНО: Форматируем цену в C# и передаем в ячейку как готовую текстовую строку
                         string formattedPrice = maxPriceGame.Price != null
                             ? ((decimal)maxPriceGame.Price).ToString("N2")
                             : "0.00";
@@ -139,14 +152,13 @@ namespace GameCatalogue.pages
                         worksheet.Cells[currentRow, 2] = $"{formattedPrice} руб.";
                     }
 
-                    // 5. КРАСИВОЕ ОФОРМЛЕНИЕ И СТИЛИЗАЦИЯ (Согласно методичке)
                     // Шрифт для всего листа
                     Excel.Range allRange = worksheet.Range["A1", $"B{currentRow}"];
                     allRange.Font.Name = "Times New Roman";
 
                     // Оформление главного заголовка страницы
                     Excel.Range titleRange = worksheet.Range["A1", "B1"];
-                    titleRange.Merge(); // Объединяем ячейки А1 и В1
+                    titleRange.Merge();
                     titleRange.Font.Size = 16;
                     titleRange.Font.Bold = true;
                     titleRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -158,7 +170,7 @@ namespace GameCatalogue.pages
                     headerRange.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
                     headerRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
 
-                    // Включаем границы (сетку) для таблицы данных
+                    // Включение границы (сетки) для таблицы данных
                     Excel.Range tableDataRange = worksheet.Range["A3", $"B{3 + allCategories.Count}"];
                     tableDataRange.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
                     tableDataRange.Borders.Weight = Excel.XlBorderWeight.xlThin;
@@ -168,7 +180,7 @@ namespace GameCatalogue.pages
                     worksheet.Columns[2].AutoFit();
                 }
 
-                // 6. Безопасное сохранение результирующих файлов в папку "Документы"
+                // Безопасное сохранение результирующих файлов в папку "Документы"
                 string excelPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Games_Report.xlsx");
 
                 // Отключаем системные предупреждения Excel перед сохранением
@@ -183,15 +195,17 @@ namespace GameCatalogue.pages
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при работе с Excel: {ex.Message}");
-                // Закрываем книгу без сохранения, если произошел сбой, чтобы очистить память
+                // В случае падения закрывается книга без сохранения
                 workbook?.Close(false);
                 excelApp?.Quit();
             }
         }
-
-
+        /// <summary>
+        /// Экспорт в ворд
+        /// </summary>
         private void BTNWord_Click(object sender, RoutedEventArgs e)
         {
+            //Проверяет есть ли данные и присваивает их новым переменным
             if (Lists.usersDBL == null || Lists.categoriesDBL == null || Lists.gamesDBL == null)
             {
                 MessageBox.Show("Данные базы данных не загружены!");
@@ -201,7 +215,7 @@ namespace GameCatalogue.pages
             var allUsers = Lists.usersDBL;
             var allCategories = Lists.categoriesDBL;
 
-            // Создаем приложение Word и новый документ
+            // Создается приложение Word и новый документ
             var application = new Word.Application();
             Word.Document document = application.Documents.Add();
 
@@ -209,7 +223,7 @@ namespace GameCatalogue.pages
             {
                 foreach (var user in allUsers)
                 {
-                    // 1. Имя пользователя (Заголовок)
+                    // Имя пользователя (Заголовок)
                     Word.Paragraph userParagraph = document.Paragraphs.Add();
                     Word.Range userRange = userParagraph.Range;
                     userRange.Text = user.FIO ?? "Пользователь без ФИО";
@@ -217,7 +231,7 @@ namespace GameCatalogue.pages
                     userRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
                     userRange.InsertParagraphAfter();
 
-                    // 2. Создание таблицы категорий игр для текущего юзера
+                    // Создание таблицы категорий игр для текущего юзера
                     Word.Paragraph tableParagraph = document.Paragraphs.Add();
                     Word.Range tableRange = tableParagraph.Range;
 
@@ -227,7 +241,7 @@ namespace GameCatalogue.pages
                     gamesTable.Borders.OutsideLineStyle = Word.WdLineStyle.wdLineStyleSingle;
                     gamesTable.Range.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
 
-                    // Заполняем шапку таблицы
+                    // Заполнение шапки таблицы
                     Word.Range cellRange;
                     cellRange = gamesTable.Cell(1, 1).Range;
                     cellRange.Text = "Категория (Жанр)";
@@ -239,7 +253,7 @@ namespace GameCatalogue.pages
                     gamesTable.Rows[1].Range.Bold = 1;
                     gamesTable.Rows[1].Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
 
-                    // Заполняем строки таблицы данными
+                    // Заполнение строк таблицы данными
                     for (int i = 0; i < allCategories.Count; i++)
                     {
                         var currentCategory = allCategories[i];
@@ -260,7 +274,7 @@ namespace GameCatalogue.pages
 
                     document.Paragraphs.Add();
 
-                    // 3. Дополнительная статистика
+                    // Дополнительная статистика
                     var userGames = Lists.gamesDBL.Where(g => g.UserID == user.ID).ToList();
                     var maxPriceGame = userGames.OrderByDescending(g => g.Price).FirstOrDefault();
 
@@ -287,33 +301,33 @@ namespace GameCatalogue.pages
                     }
                 }
 
-                // ИСПРАВЛЕНО: Безопасное сохранение файлов
-                // Чтобы не было проблем с правами диска С/D, сохраняем в "Мои Документы" текущего юзера Windows
+                // Сохранение в "Мои Документы" текущего юзера Windows
                 string docPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Games.docx");
                 string pdfPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Games.pdf");
 
-                // Сначала сохраняем DOCX
+                // Сначала сохраняется DOCX
                 document.SaveAs2(docPath);
 
-                // Для PDF используем специализированный метод экспорта, чтобы не вешать ворд
+                // Для PDF используется специализированный метод экспорта, чтобы не вешать ворд
                 document.ExportAsFixedFormat(pdfPath, Word.WdExportFormat.wdExportFormatPDF);
 
                 MessageBox.Show($"Отчеты успешно сохранены в папку 'Документы'!\nDOCX: {docPath}\nPDF: {pdfPath}", "Успех");
 
-                // Делаем Word видимым для пользователя
+                // Word делается видимым для пользователя
                 application.Visible = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при работе с Word: {ex.Message}");
 
-                // В случае падения закрываем процесс, чтобы не забивать оперативку
+                // В случае падения процесс закрывается
                 document?.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
                 application?.Quit();
             }
         }
-
-
+        /// <summary>
+        /// Перекидывает пользователя на предыдущую страницу
+        /// </summary>
         private void BTNback_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.GoBack();
