@@ -9,51 +9,34 @@
 
     <Grid Margin="30">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
-            <Label Content="Капча:"
-               Visibility="Collapsed"
-               Name="labelCaptcha"
-               Width="54" />
+            <Label Content="Капча:" Visibility="Collapsed" Name="labelCaptcha"/>
             <TextBox 
                 CommandManager.PreviewExecuted="textBox_PreviewExecuted"
                 ContextMenu="{x:Null}"
                 Visibility="Collapsed"
                 x:Name="captcha"
-                Height="42"
+                Height="45"
                 Foreground="Red"
                 FontStyle="Italic"
                 FontWeight="Heavy"
                 VerticalAlignment="Top"
-                Width="156"
+                Width="155"
                 Background="{x:Null}"
                 FontStretch="UltraCondensed"
                 IsReadOnly="True"
                 HorizontalContentAlignment="Center"
                 FontSize="20" />
-            <TextBox Visibility="Collapsed"
-                x:Name="captchaInput"
-                HorizontalAlignment="Left"
-                Height="34"
-                TextWrapping="Wrap"
-                Text=""
-                VerticalAlignment="Top"
-                Width="160" />
-            <Button x:Name="submitCaptcha"
-                Visibility="Collapsed"
-                Height="34"
-                Content="Submit"
-                ToolTip="Подтвердить ввод капчи"
-                Width="120"
-                Grid.Column="1"
-                Click="submitCaptcha_Click" />
+            <TextBox Visibility="Collapsed" x:Name="captchaInput" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Ввеедите текст с изображения" />
+            <Button x:Name="submitCaptcha" Visibility="Collapsed" Content="Подтвердить" ToolTip="Подтвердить ввод капчи" Click="submitCaptcha_Click" />
 
 
             <Label Content="Логин" x:Name="labelLogin"/>
-            <TextBox x:Name="TBLogin" ToolTip="Введите логин или почту"/>
+            <TextBox x:Name="TBLogin" ToolTip="Введите логин" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: sasa"/>
             <Label Content="Пароль" x:Name="labelPass"/>
-            <PasswordBox x:Name="PasswordBox" ToolTip="Введите пароль"/>
-            <Button x:Name="BTNEnter" Content="Log In" ToolTip="Нажмите, чтобы войти" Click="BTNEnter_Click" />
-            <Button x:Name="BTNReg" Content="Create account" ToolTip="Нажмите, чтобы создать аккаунт" Click="BTNReg_Click"/>
-            <Button x:Name="BTNChangePassword" Content="Change password" ToolTip="Нажмите, чтобы сменить пароль" Click="BTNChangePassword_Click"/>
+            <PasswordBox x:Name="PasswordBox" ToolTip="Введите пароль" Style="{StaticResource PlaceholderPasswordBoxStyle}" Tag="Например: 67SWAGA67"/>
+            <Button x:Name="BTNEnter" Content="Войти" ToolTip="Нажмите, чтобы войти" Margin="0, 10" Click="BTNEnter_Click" />
+            <Button x:Name="BTNReg" Content="Создать аккаунт" ToolTip="Нажмите, чтобы создать аккаунт" Margin="0, 10" Click="BTNReg_Click"/>
+            <Button x:Name="BTNChangePassword" Content="Сменить пароль" ToolTip="Нажмите, чтобы сменить пароль" Margin="0,10" Click="BTNChangePassword_Click"/>
         </StackPanel>
     </Grid>
 </Page>

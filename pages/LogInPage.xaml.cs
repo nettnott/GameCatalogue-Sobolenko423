@@ -21,13 +21,21 @@ namespace GameCatalogue.pages
     /// </summary>
     public partial class LogInPage : Page
     {
+        // Счетчик проваленных попыток
         private int failedAttempts = 0;
 
         public LogInPage()
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Обрабатывает нажатие на кнопку входа.
+        /// Проверяет заполненность полей.
+        /// Если все ок - получает хэш пароля и ищет совпадение юзера с таким паролем в БД
+        /// Если такого пользователя нет - прибавляет счетчик проваленных попыток входа. Если их 3 и больше - выводит капчу.
+        /// Если пользователь уже в акааунте - выводит сообщение о необходимости выйти из него
+        /// Если все ок - записывает нового currentUser и обновляет видимость главного меню. Перекидывает пользователя на страницу аккаунта или админки в зависимости от роли
+        /// </summary>
         private void BTNEnter_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(TBLogin.Text) || string.IsNullOrEmpty(PasswordBox.Password))
@@ -38,15 +46,14 @@ namespace GameCatalogue.pages
 
             string hashedPassword = GetHash(PasswordBox.Password);
 
-            var db = Core.Context;
-            var user = db.Users
+            var user = Core.Context.Users
                 .AsNoTracking()
                 .FirstOrDefault(u => u.Login == TBLogin.Text &&
                 u.Password == hashedPassword);
 
             if (user == null)
             {
-                MessageBox.Show("Пользователь с такими данными не найден!");
+                MessageBox.Show("Неверный логин или пароль!");
                 failedAttempts++;
                 if (failedAttempts >= 3)
                 {
@@ -85,17 +92,25 @@ namespace GameCatalogue.pages
                 }
             }
         }
-
+        /// <summary>
+        /// Обрабатывает нажатие на кнопку регистрации
+        /// Перекидывает пользователя н астраницу регистрации
+        /// </summary>
         private void BTNReg_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RegisterPage());
         }
-
+        /// <summary>
+        /// Обрабатывает нажатие на кнопку смены пароля.
+        /// Перекидывает пользователя на страницу смены пароля.
+        /// </summary>
         private void BTNChangePassword_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ChangePassPage());
         }
-
+        /// <summary>
+        /// Хэшиирует пароль.
+        /// </summary>
         public static string GetHash(String password)
         {
             using (var hash = SHA1.Create())
@@ -105,7 +120,9 @@ namespace GameCatalogue.pages
                 x.ToString("X2")));
             }
         }
-
+        /// <summary>
+        /// Отвечает за смену видимости элементов страницы в зависимости от режима капчи/не капчи
+        /// </summary>
         public void CaptchaSwitch()
         {
             switch (captcha.Visibility)
@@ -145,7 +162,10 @@ namespace GameCatalogue.pages
                     return;
             }
         }
-
+        /// <summary>
+        /// Генерация капчи.
+        /// Задается список разрешенных символов и ими заполняется капча
+        /// </summary>
         public void CaptchaChange() {
 
             String allowchar = " ";
@@ -165,7 +185,10 @@ namespace GameCatalogue.pages
             }
             captcha.Text = pwd;
         }
-
+        /// <summary>
+        /// Проверяет верно ли ведена капча.
+        /// Если все ок - обнуляет счетчик провальных попыток
+        /// </summary>
         private void submitCaptcha_Click(object sender, RoutedEventArgs e)
         {
             if (captchaInput.Text != captcha.Text)
@@ -181,7 +204,9 @@ namespace GameCatalogue.pages
                 failedAttempts = 0;
             }
         }
-
+        /// <summary>
+        /// Запрет копироваиия, вставки и вырезания чтобы не крали капчу а вводили
+        /// </summary>
         private void textBox_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Command == ApplicationCommands.Copy ||
