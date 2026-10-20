@@ -25,7 +25,12 @@ namespace GameCatalogue.pages
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Проверка правильности пароля.
+        /// Проверяет, все ли поля заполнены, если да то проверяет есть ли такой юзер в бд и такой ли у него старый пароль.
+        /// Если все ок, то вызывает функцию проверки сложности пароля.
+        /// Если все ок, то хэширует пароль и сохраняет в бд
+        /// </summary>
         private void CheckRightness()
         {
             if (string.IsNullOrEmpty(PasswordBox.Password) ||
@@ -39,8 +44,7 @@ namespace GameCatalogue.pages
             else
             {
                 string hashedPass = GetHash(PasswordBox.Password);
-                var user = Lists.usersDBL
-                                        .FirstOrDefault(u => u.Login == TBLogin.Text && u.Password == hashedPass);
+                var user = Lists.usersDBL.FirstOrDefault(u => u.Login == TBLogin.Text && u.Password == hashedPass);
 
                 if (user == null)
                 {
@@ -59,6 +63,9 @@ namespace GameCatalogue.pages
                 }
             }
         }
+        /// <summary>
+        /// Функция для хэширования пароля
+        /// </summary>
         public static string GetHash(String password)
         {
             using (var hash = SHA1.Create())
@@ -68,10 +75,13 @@ namespace GameCatalogue.pages
                 x.ToString("X2")));
             }
         }
-
+        /// <summary>
+        /// Обрабатывает нажатие на кнопку добавления.
+        /// Перекидывает пользователя на страницу добавления категории и передает туда значение "null"
+        /// </summary>
         private bool CheckPSW(String password1, String password2)
         {
-            // 1. Проверяем длину (минимум 6 символов)
+            // Проверяет длину (минимум 6 символов)
             if (password1.Length < 6)
             {
                 MessageBox.Show("Пароль слишком короткий, должно быть минимум 6 символов!");
@@ -81,7 +91,7 @@ namespace GameCatalogue.pages
             bool hasDigit = false;
             bool onlyEnglish = true;
 
-            // 2. Проверяем состав пароля за один цикл
+            // Проверяет состав пароля за один цикл
             foreach (char c in password1)
             {
                 if (char.IsDigit(c))
@@ -106,7 +116,7 @@ namespace GameCatalogue.pages
                 return false;
             }
 
-            // 3. Проверяем совпадение паролей
+            // Проверяет совпадение паролей
             if (password1 != password2)
             {
                 MessageBox.Show("Пароли не совпадают!");
@@ -115,11 +125,18 @@ namespace GameCatalogue.pages
 
             return true;
         }
+        /// <summary>
+        /// Обрабатывает нажатие на кнопку назад.
+        /// Перекидывает пользователя на предыдущую страницу.
+        /// </summary>
         private void ButtonBack_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.GoBack();
         }
-
+        /// <summary>
+        /// Обрабатывает нажатие на кнопку подтверждения смены пароля.
+        /// Вызывает проверку правильности пароля.
+        /// </summary>
         private void BTNChangePassword_Click(object sender, RoutedEventArgs e)
         {
             CheckRightness();

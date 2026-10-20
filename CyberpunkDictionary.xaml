@@ -137,4 +137,54 @@
         <Setter Property="FontFamily" Value="Open Sans"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
     </Style>
+
+    <!-- Специальный стиль для PasswordBox с поддержкой плейсхолдера через Tag -->
+    <Style x:Key="PlaceholderPasswordBoxStyle" TargetType="PasswordBox">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Margin" Value="0,6,0,12"/>
+        <Setter Property="Padding" Value="8,0"/>
+        <Setter Property="FontFamily" Value="Open Sans"/>
+        <Setter Property="FontSize" Value="11pt"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border x:Name="border" 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="4">
+                        <Grid>
+                            <!-- Стандартный контейнер для скрытых точек пароля -->
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+
+                            <!-- Текст нашего плейсхолдера -->
+                            <TextBlock x:Name="placeholderText" 
+                                   Text="{TemplateBinding Tag}" 
+                                   Foreground="Gray" 
+                                   FontStyle="Italic"
+                                   VerticalAlignment="Center" 
+                                   Margin="8,0"
+                                   IsHitTestVisible="False" 
+                                   Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Когда поле НЕ в фокусе (пользователь туда не кликнул), показываем подсказку -->
+                        <Trigger Property="IsKeyboardFocusWithin" Value="False">
+                            <Setter TargetName="placeholderText" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+
+                        <!-- Когда пользователь кликнул в поле, мгновенно скрываем её -->
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="placeholderText" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

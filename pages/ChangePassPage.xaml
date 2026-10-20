@@ -11,15 +11,15 @@
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Логин"/>
-            <TextBox x:Name="TBLogin" ToolTip="Введите логин или почту"/>
+            <TextBox x:Name="TBLogin" ToolTip="Введите логин или почту" Style="{StaticResource PlaceholderTextBoxStyle}" Tag="Например: sasa"/>
             <Label Content="Старый пароль"/>
-            <PasswordBox x:Name="PasswordBox" ToolTip="Введите старый пароль"/>
+            <PasswordBox x:Name="PasswordBox" ToolTip="Введите старый пароль" Style="{StaticResource PlaceholderPasswordBoxStyle}" Tag="Например: PAST PASSWORD"/>
             <Label Content="Новый пароль"/>
-            <PasswordBox x:Name="PasswordBoxBRANDNEW" ToolTip="Введите новый пароль"/>
+            <PasswordBox x:Name="PasswordBoxBRANDNEW" ToolTip="Введите новый пароль" Style="{StaticResource PlaceholderPasswordBoxStyle}" Tag="Например: SUPER PASSWORD"/>
             <Label Content="Повторите новый пароль"/>
-            <PasswordBox x:Name="PasswordBoxNEWCheck" ToolTip="Повторите новый пароль"/>
+            <PasswordBox x:Name="PasswordBoxNEWCheck" ToolTip="Повторите новый пароль" Style="{StaticResource PlaceholderPasswordBoxStyle}" Tag="Например: SUPER PASSWORD"/>
             
-            <Button x:Name="BTNChangePassword" Content="Change password" ToolTip="Нажмите, чтобы сменить пароль" Click="BTNChangePassword_Click"/>
+            <Button x:Name="BTNChangePassword" Content="Сменить пароль" ToolTip="Нажмите, чтобы сменить пароль" Click="BTNChangePassword_Click"/>
             <Button x:Name="ButtonBack" Content="Назад" ToolTip="Назад" Click="ButtonBack_Click"/>
 
         </StackPanel>
